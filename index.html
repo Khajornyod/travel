@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kansai Japan Guide — ที่เที่ยวและพิพิธภัณฑ์แนะนำ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Shippori+Mincho:wght@400;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --paper: #f5f0e8;
+    --warm: #f0e8d5;
+    --accent: #c84b11;
+    --gold: #b5882a;
+    --muted: #7a6a52;
+    --border: #d5c9b0;
+    --osaka: #c84b11;
+    --kyoto: #6b3fa0;
+    --nara: #2d7a4f;
+    --wakayama: #1a6fa8;
+    --himeji: #8a6b0a;
+    --mie: #a83228;
+    --shiga: #1e7a8a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Sarabun', 'Noto Serif JP', serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 80px 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(200,75,17,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 50%, rgba(107,63,160,0.12) 0%, transparent 60%);
+  }
+
+  .hero-jp {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    line-height: 1;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero-th {
+    font-family: 'Sarabun', sans-serif;
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    font-weight: 300;
+    color: rgba(245,240,232,0.7);
+    margin-top: 12px;
+    letter-spacing: 0.05em;
+    position: relative;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.5s;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+    position: relative;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.7s;
+  }
+
+  .hero-pill {
+    background: rgba(181,136,42,0.2);
+    border: 1px solid rgba(181,136,42,0.4);
+    color: var(--gold);
+    padding: 6px 18px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  /* SHARE BAR */
+  .share-bar {
+    background: var(--warm);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .share-label {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .share-btns {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .share-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+    font-family: 'Sarabun', sans-serif;
+    text-decoration: none;
+  }
+
+  .btn-copy {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .btn-copy:hover { background: #333; transform: translateY(-1px); }
+
+  .btn-line {
+    background: #06C755;
+    color: white;
+  }
+  .btn-line:hover { background: #05b34c; transform: translateY(-1px); }
+
+  .btn-fb {
+    background: #1877F2;
+    color: white;
+  }
+  .btn-fb:hover { background: #1565d8; transform: translateY(-1px); }
+
+  .btn-x {
+    background: #000;
+    color: white;
+  }
+  .btn-x:hover { background: #333; transform: translateY(-1px); }
+
+  .copy-toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 999;
+    pointer-events: none;
+  }
+  .copy-toast.show { transform: translateY(0); opacity: 1; }
+
+  /* TABS */
+  .tabs-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--paper);
+    border-bottom: 2px solid var(--border);
+    padding: 0 40px;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 0;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .tab-btn {
+    padding: 18px 32px;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .tab-btn.active {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+  }
+
+  .tab-btn:hover:not(.active) {
+    color: var(--ink);
+  }
+
+  /* MAIN CONTENT */
+  .content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 40px;
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* PROVINCE SECTION */
+  .province-block {
+    margin-bottom: 56px;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  .province-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .province-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .province-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .province-count {
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: var(--muted);
+    background: var(--warm);
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  /* CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(26,18,8,0.1);
+    border-color: rgba(26,18,8,0.2);
+  }
+
+  .card-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .card-reason {
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+  }
+
+  .card-time {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  .review-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 5px 12px;
+    border: 1.5px solid var(--accent);
+    border-radius: 100px;
+    transition: all 0.2s ease;
+  }
+
+  .review-link:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  /* MUSEUM CARDS */
+  .museum-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .museum-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(26,18,8,0.1);
+  }
+
+  .museum-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .museum-about {
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .museum-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+  }
+
+  /* SEASON NOTE */
+  .season-banner {
+    background: linear-gradient(135deg, #fff8ed, #fff0f0);
+    border: 1px solid #f5d5a0;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .season-icon { font-size: 1.8rem; flex-shrink: 0; }
+
+  .season-text { font-size: 0.88rem; line-height: 1.7; color: #7a4a10; }
+  .season-text strong { color: #b5400a; }
+
+  /* GRUTTO TIP */
+  .tip-banner {
+    background: linear-gradient(135deg, #eef3ff, #f0fff4);
+    border: 1px solid #b8cff5;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .tip-text { font-size: 0.88rem; line-height: 1.7; color: #2a4a7a; }
+  .tip-text strong { color: #1a3a6a; }
+
+  /* ANIMATION */
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .province-block:nth-child(1) { animation-delay: 0.05s; }
+  .province-block:nth-child(2) { animation-delay: 0.1s; }
+  .province-block:nth-child(3) { animation-delay: 0.15s; }
+  .province-block:nth-child(4) { animation-delay: 0.2s; }
+  .province-block:nth-child(5) { animation-delay: 0.25s; }
+  .province-block:nth-child(6) { animation-delay: 0.3s; }
+  .province-block:nth-child(7) { animation-delay: 0.35s; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: var(--muted);
+    text-align: center;
+    padding: 32px;
+    font-size: 0.82rem;
+    margin-top: 60px;
+  }
+
+  footer span { color: var(--gold); }
+
+  @media (max-width: 600px) {
+    .hero { padding: 60px 20px 40px; }
+    .share-bar { padding: 12px 20px; }
+    .tabs-wrapper { padding: 0 16px; }
+    .content { padding: 32px 20px; }
+    .tab-btn { padding: 16px 16px; font-size: 0.88rem; }
+    .cards-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-jp">関西旅行ガイド</div>
+  <div class="hero-th">คู่มือท่องเที่ยวคันไซ ญี่ปุ่น · ต้นพฤษภาคม (Golden Week)</div>
+  <div class="hero-meta">
+    <span class="hero-pill">✈️ เดินทาง 7 วัน</span>
+    <span class="hero-pill">🛬 เข้า KIX</span>
+    <span class="hero-pill">🌸 Golden Week</span>
+    <span class="hero-pill">🗾 7 จังหวัด</span>
+  </div>
+</div>
+
+<!-- SHARE BAR -->
+<div class="share-bar">
+  <span class="share-label">📤 แชร์ให้เพื่อน</span>
+  <div class="share-btns">
+    <button class="share-btn btn-copy" onclick="copyLink()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+      คัดลอกลิงค์
+    </button>
+    <a class="share-btn btn-line" href="https://social-plugins.line.me/lineit/share?url=https://japan-kansai-guide.netlify.app" target="_blank">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.105.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+      LINE
+    </a>
+    <a class="share-btn btn-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://japan-kansai-guide.netlify.app" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      Facebook
+    </a>
+    <a class="share-btn btn-x" href="https://twitter.com/intent/tweet?text=คู่มือท่องเที่ยวคันไซ+7+วัน+Golden+Week+🇯🇵&url=https://japan-kansai-guide.netlify.app" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      X
+    </a>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrapper">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('attractions', this)">🗺️ ที่เที่ยว (37 แห่ง)</button>
+    <button class="tab-btn" onclick="switchTab('museums', this)">🏛️ พิพิธภัณฑ์ (24 แห่ง)</button>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- TAB: ATTRACTIONS -->
+  <div class="tab-panel active" id="tab-attractions">
+
+    <div class="season-banner">
+      <div class="season-icon">🌸</div>
+      <div class="season-text">
+        <strong>ช่วง Golden Week (ต้นพฤษภาคม)</strong> — ดอกเด่นคือ <strong>藤 Wisteria</strong> สีม่วงระย้า และ <strong>Azalea</strong> สีชมพูแดง สถานที่ยอดนิยมอย่าง Fushimi Inari, Arashiyama, Kinkakuji จะ<strong>คนแน่นมาก</strong> แนะนำไปก่อน 7–8 โมงเช้า
+      </div>
+    </div>
+
+    <!-- OSAKA -->
+    <div class="province-block">
+      <div class="province-header">
+        <div class="province-dot" style="background:#c84b11"></div>
+        <div class="province-name">🏯 โอซาก้า (Osaka)</div>
+        <div class="province-count">5 แห่ง</div>
+      </div>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-name">ปราสาทโอซาก้า + สวนรอบปราสาท (Osaka Castle Park)</div>
+          <div class="card-reason">สัญลักษณ์ของโอซาก้า ช่วงพฤษภาดอกไม้รอบปราสาทสวยมาก</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 2–3 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d320963-Reviews-Osaka_Castle-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">ชินเซไกและสวนเทนโนจิ (Shinsekai / Tennoji)</div>
+          <div class="card-reason">ย่านเก่าแก่บรรยากาศย้อนยุค กิน kushikatsu เมนูดังของโอซาก้า</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 2–3 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d1374786-Reviews-Shinsekai-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">โดทมบอริ + ชินไซบาชิ (Dotonbori / Shinsaibashi)</div>
+          <div class="card-reason">หัวใจของโอซาก้า กิน street food เดิน ถ่ายรูป ช้อปปิ้ง ดีที่สุดช่วงเย็น-ค่ำ</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 3–4 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d1373070-Reviews-Dotonbori-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">คุโรมอน อิจิบะ (Kuromon Ichiba Market)</div>
+          <div class="card-reason">ตลาดสดที่คนญี่ปุ่นและนักท่องเที่ยวชอบ อาหารทะเลสด ราคาโอเค</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d1373069-Reviews-Kuromon_Ichiba_Market-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">อุเมดะ (Umeda)</div>
+          <div class="card-reason">ช้อปปิ้งครบ ขึ้น Sky Building ชมวิวเมืองได้ด้วย</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 2–3 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d592808-Reviews-Umeda_Sky_Building-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KYOTO -->
+    <div class="province-block">
+      <div class="province-header">
+        <div class="province-dot" style="background:#6b3fa0"></div>
+        <div class="province-name">⛩️ เกียวโต (Kyoto)</div>
+        <div class="province-count">11 แห่ง</div>
+      </div>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-name">ฟูชิมิ อินาริ (Fushimi Inari)</div>
+          <div class="card-reason">โทริอิสีส้มพันๆ ต้น ไอคอนิกที่สุดของเกียวโต ไปเช้ามากๆ คนน้อยกว่า</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 2–3 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d320048-Reviews-Fushimi_Inari_Taisha-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">อาราชิยามะ: ป่าไผ่ + วัดเทนริวจิ (Arashiyama)</div>
+          <div class="card-reason">ป่าไผ่บรรยากาศเงียบสงบ + วัดสวนสวย ริมแม่น้ำโออิ</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 3–4 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d320058-Reviews-Arashiyama-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">คินคาคุจิ วัดทองคำ (Kinkaku-ji)</div>
+          <div class="card-reason">วัดชุบทองสะท้อนในสระน้ำ หนึ่งในภาพที่โด่งดังที่สุดของญี่ปุ่น</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1.5 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d320030-Reviews-Kinkaku_ji_Temple-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">กิออน + ถนนนิเนนซากะ (Gion / Ninenzaka)</div>
+          <div class="card-reason">ย่านเกอิชา ถนนหินโบราณ บรรยากาศญี่ปุ่นคลาสสิก</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 2–3 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d1850534-Reviews-Ninenzaka-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">วัดคิโยมิซุเดระ (Kiyomizudera)</div>
+          <div class="card-reason">วัดบนหน้าผา ระเบียงไม้ชมวิวเมืองเกียวโต เก่าแก่กว่า 1,200 ปี</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1.5–2 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d320012-Reviews-Kiyomizudera_Temple-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">นิโจ้ คาสเซิล (Nijo Castle)</div>
+          <div class="card-reason">ปราสาทโชกุน พื้นร้องเสียงนกไนติงเกล ภาพวาดทองในอาคารงดงาม</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1.5–2 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d320024-Reviews-Nijo_Castle-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">ฟิโลโซเฟอร์ส พาธ (Philosopher's Path)</div>
+          <div class="card-reason">ทางเดินริมคลองร่มรื่น เชื่อมวัดหลายแห่ง บรรยากาศดีมาก</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1–1.5 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d1372674-Reviews-Philosopher_s_Path-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">อุจิ: วัดเบียวโดอิน + ชาเขียว (Uji / Byodoin)</div>
+          <div class="card-reason">วัดติดภาพเหรียญ 10 เยน + แหล่งชาเขียวที่ดีที่สุดของญี่ปุ่น</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 2–3 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298559-d317813-Reviews-Byodo_in_Temple-Uji_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">วัดนินนาจิ ดอก Wisteria (Ninnaji)</div>
+          <div class="card-reason">ดอก Wisteria สีม่วงระย้าบานช่วงต้นพฤษภา สวยมาก 🌸</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1.5 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d320028-Reviews-Ninnaji_Temple-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">อาโออิ มัตสึริ (Aoi Matsuri — 15 พ.ค.)</div>
+          <div class="card-reason">ขบวนแห่เก่าแก่กว่า 1,400 ปี ชุดราชสำนักเฮอัน ถ้าวันตรงควรดูมาก</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 2–3 ชม.</div>
+            <a class="review-link" href="https://www.google.com/search?q=Aoi+Matsuri+Kyoto+review" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NARA -->
+    <div class="province-block">
+      <div class="province-header">
+        <div class="province-dot" style="background:#2d7a4f"></div>
+        <div class="province-name">🦌 นารา (Nara)</div>
+        <div class="province-count">6 แห่ง</div>
+      </div>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-name">สวนนารา + กวางป่า (Nara Park)</div>
+          <div class="card-reason">กวางศักดิ์สิทธิ์เดินอิสระทั่วสวน ให้อาหารได้ใกล้ชิดมาก</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1–2 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298198-d320337-Reviews-Nara_Park-Nara_Nara_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">วัดโทไดจิ (Todai-ji)</div>
+          <div class="card-reason">พระพุทธรูปสำริดใหญ่ที่สุดในโลก อาคารไม้ใหญ่ที่สุดในโลกด้วย</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1–1.5 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298198-d320316-Reviews-Todaiji_Temple-Nara_Nara_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">คาสุกะ ไทชา (Kasuga Taisha)</div>
+          <div class="card-reason">ศาลเจ้ากลางป่า โคมไฟพันดวงบรรยากาศศักดิ์สิทธิ์</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298198-d320338-Reviews-Kasuga_Grand_Shrine-Nara_Nara_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">ย่านนาราชิ (Naramachi)</div>
+          <div class="card-reason">ย่านพ่อค้าเก่าแก่ ร้านขนม ร้านคราฟต์ เดินเล่นชิลล์</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298198-d598272-Reviews-Naramachi-Nara_Nara_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">ศาลเจ้าอิซะกาวะ Wisteria Festival (Isagawa Shrine)</div>
+          <div class="card-reason">เทศกาลดอก Wisteria เก่าแก่ที่สุดในญี่ปุ่น จัดช่วงต้นพฤษภา 🌸</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1–1.5 ชม.</div>
+            <a class="review-link" href="https://www.google.com/search?q=Isagawa+Shrine+Wisteria+Nara+review" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">โยชิโนะ (Yoshino)</div>
+          <div class="card-reason">ภูเขาดอกไม้ ดอกอาซาเล่ยบานต่อจากซากุระ วิวสวยมาก</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ ครึ่งวัน</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g1121290-d1390869-Reviews-Yoshino_Mountain-Yoshino_cho_Yoshino_gun_Nara_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WAKAYAMA -->
+    <div class="province-block">
+      <div class="province-header">
+        <div class="province-dot" style="background:#1a6fa8"></div>
+        <div class="province-name">🌊 วากายามะ (Wakayama)</div>
+        <div class="province-count">5 แห่ง</div>
+      </div>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-name">โคยาซัน (Koyasan)</div>
+          <div class="card-reason">ศูนย์กลางพุทธศาสนาชินงอน สุสานโอคุโนะอิน บรรยากาศลึกลับศักดิ์สิทธิ์</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 3–4 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g1121285-d317914-Reviews-Okunoin-Koya_cho_Ito_gun_Wakayama_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">ปราสาทวากายามะ (Wakayama Castle)</div>
+          <div class="card-reason">ปราสาทริมทะเล วิวดี สวนรอบปราสาทสวย</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1.5 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298202-d317918-Reviews-Wakayama_Castle-Wakayama_Wakayama_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">คุมาโน่ โคโด้ (Kumano Kodo)</div>
+          <div class="card-reason">เส้นทางแสวงบุญมรดกโลก เดินป่าในธรรมชาติร่มรื่น</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ ครึ่งวัน–เต็มวัน</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g1022854-d1214548-Reviews-Kumano_Kodo-Tanabe_Wakayama_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">ชิราฮามะ (Shirahama Beach)</div>
+          <div class="card-reason">หาดทรายขาวชายทะเล น้ำใสสะอาด เริ่มสวยช่วงต้นพฤษภา</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 2–3 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298205-d317943-Reviews-Shirahama_Beach-Shirahama_cho_Nishimuro_gun_Wakayama_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">สวนดอกไม้ฮานะโนะมิยาโกะ (Hana no Miyako)</div>
+          <div class="card-reason">ดอกไม้ฤดูใบไม้ผลิหลากสี บานพร้อมกันช่วงนี้ 🌸</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1.5 ชม.</div>
+            <a class="review-link" href="https://www.google.com/search?q=Hana+no+Miyako+Wakayama+review" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HIMEJI -->
+    <div class="province-block">
+      <div class="province-header">
+        <div class="province-dot" style="background:#8a6b0a"></div>
+        <div class="province-name">🍢 ฮิเมจิ (Hyogo / Himeji)</div>
+        <div class="province-count">3 แห่ง</div>
+      </div>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-name">ปราสาทฮิเมจิ (Himeji Castle)</div>
+          <div class="card-reason">ปราสาทที่สวยที่สุดในญี่ปุ่น มรดกโลก UNESCO สีขาวโดดเด่นมาก</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 2–3 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298553-d320003-Reviews-Himeji_Castle-Himeji_Hyogo_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">สวนโคโคเอ็น (Koko-en Garden)</div>
+          <div class="card-reason">สวนญี่ปุ่นสไตล์เอโดะ อยู่ติดปราสาท ไปต่อได้เลย</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298553-d317758-Reviews-Koko_en_Garden-Himeji_Hyogo_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">สวน Wisteria วัดยุเมซากิ (Yumesakibashi)</div>
+          <div class="card-reason">ดอก Wisteria ระย้าสีม่วงสวยงาม นิยมมากช่วง Golden Week 🌸</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1 ชม.</div>
+            <a class="review-link" href="https://www.google.com/search?q=Yumesakibashi+wisteria+Himeji+review" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MIE -->
+    <div class="province-block">
+      <div class="province-header">
+        <div class="province-dot" style="background:#a83228"></div>
+        <div class="province-name">🌅 มิเอะ (Mie)</div>
+        <div class="province-count">5 แห่ง</div>
+      </div>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-name">ศาลเจ้าอิเสะ (Ise Jingu) ชั้นในและชั้นนอก</div>
+          <div class="card-reason">ศาลเจ้าศักดิ์สิทธิ์ที่สุดของญี่ปุ่น อายุกว่า 2,000 ปี</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 2–3 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298196-d317819-Reviews-Ise_Jingu_Grand_Shrine-Ise_Mie_Prefecture_Tokai_Chubu.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">โอะกาเกะ-โชะ (Okage-yokocho)</div>
+          <div class="card-reason">ถนนเก่าสไตล์เอโดะ กิน akafuku mochi ขนมดังประจำอิเสะ</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1–1.5 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298196-d1380064-Reviews-Okage_Yokocho-Ise_Mie_Prefecture_Tokai_Chubu.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">อ่าวอากะ + ไข่มุก Mikimoto (Ago Bay)</div>
+          <div class="card-reason">ล่องเรือชมอ่าว แหล่งกำเนิดไข่มุกเพาะเลี้ยงแห่งแรกของโลก</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1.5–2 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298195-d324880-Reviews-Mikimoto_Pearl_Island-Toba_Mie_Prefecture_Tokai_Chubu.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">หินคู่ เมียวโตะ อิวะ (Meoto Iwa)</div>
+          <div class="card-reason">หินสามีภรรยาผูกเชือกศักดิ์สิทธิ์ริมทะเล ชมพระอาทิตย์ขึ้นสวยมาก</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1–1.5 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298196-d317832-Reviews-Meoto_Iwa-Ise_Mie_Prefecture_Tokai_Chubu.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">ตลาดเช้า Toba / Ise</div>
+          <div class="card-reason">อาหารทะเลสดริมทะเล บรรยากาศชาวประมงท้องถิ่น</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1 ชม.</div>
+            <a class="review-link" href="https://www.google.com/search?q=Toba+morning+market+Mie+review" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHIGA -->
+    <div class="province-block">
+      <div class="province-header">
+        <div class="province-dot" style="background:#1e7a8a"></div>
+        <div class="province-name">🏔️ ทะเลสาบบิวะ / ชิกะ (Lake Biwa / Shiga)</div>
+        <div class="province-count">5 แห่ง</div>
+      </div>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-name">ปราสาทฮิโกเนะ (Hikone Castle)</div>
+          <div class="card-reason">ปราสาทระดับ National Treasure อายุ 400 ปี ยังคงสภาพดีมาก</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 2–2.5 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298204-d317930-Reviews-Hikone_Castle-Hikone_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">ย่านเมืองเก่าฮิโกเนะ (Yume Kyobashi Castle Road)</div>
+          <div class="card-reason">ถนนหินเก่าแก่ ร้านขนม ร้านของที่ระลึกน่ารัก</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298204-d1565218-Reviews-Yume_Kyobashi_Castle_Road-Hikone_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">นาการาฮามะ (Nagahama)</div>
+          <div class="card-reason">เมืองริมทะเลสาบ มีร้านแก้วคราฟต์ชื่อดัง (Kurokabe)</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1.5–2 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g1022745-d1199714-Reviews-Kurokabe_Square-Nagahama_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">ล่องเรือทะเลสาบบิวะ (Biwako Cruise)</div>
+          <div class="card-reason">ทะเลสาบใหญ่ที่สุดในญี่ปุ่น วิวภูเขาโอบล้อมรอบด้าน</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1.5 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298200-d1455774-Reviews-Lake_Biwa-Otsu_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-name">วัดอิชิยามะเดระ (Ishiyamadera)</div>
+          <div class="card-reason">วัดริมทะเลสาบ ดอก Wisteria บานสวยช่วงพฤษภา 🌸</div>
+          <div class="card-footer">
+            <div class="card-time">⏱ 1–1.5 ชม.</div>
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298200-d1455851-Reviews-Ishiyamadera_Temple-Otsu_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: MUSEUMS -->
+  <div class="tab-panel" id="tab-museums">
+
+    <div class="tip-banner">
+      <div class="season-icon">🎟️</div>
+      <div class="tip-text">
+        <strong>Kansai Grutto Pass (1,400 เยน)</strong> — ให้สิทธิ์เข้าฟรีหรือลดราคากว่า 50 พิพิธภัณฑ์ในคันไซ ใช้ได้ 3 เดือน ถ้าแพลนเที่ยวพิพิธภัณฑ์หลายแห่งในโอซาก้า-เกียวโต คุ้มมาก
+      </div>
+    </div>
+
+    <!-- OSAKA MUSEUMS -->
+    <div class="province-block">
+      <div class="province-header">
+        <div class="province-dot" style="background:#c84b11"></div>
+        <div class="province-name">🏯 โอซาก้า (Osaka)</div>
+        <div class="province-count">7 แห่ง</div>
+      </div>
+      <div class="cards-grid">
+        <div class="museum-card">
+          <div class="museum-name">Osaka Museum of History</div>
+          <div class="museum-about">ประวัติศาสตร์โอซาก้า 1,350 ปี มีการจำลองพระราชวัง Naniwa ในศตวรรษที่ 7 จำลองย่านเมืองเก่า และโรงละคร Kabuki ขนาดเท่าของจริง</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d592812-Reviews-Osaka_Museum_of_History-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Osaka Museum of Housing and Living</div>
+          <div class="museum-about">จำลองถนนและบ้านเรือนสมัยเอโดะและเมจิ ให้เดินเข้าไปสัมผัสบรรยากาศชีวิตคนโอซาก้าโบราณ</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d592811-Reviews-Osaka_Museum_of_Housing_and_Living-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">National Museum of Art Osaka (NMAO)</div>
+          <div class="museum-about">ศิลปะญี่ปุ่นและนานาชาติหลังสงครามโลกครั้งที่ 2 รวมถึงงานของ Chiharu Shiota และ Christian Boltanski อยู่ใต้ดินบนเกาะ Nakanoshima</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d592810-Reviews-National_Museum_of_Art_Osaka-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Nakanoshima Fine Arts Museum (NAKKA)</div>
+          <div class="museum-about">ศิลปะสมัยใหม่และร่วมสมัยที่เกี่ยวข้องกับโอซาก้าและคันไซ รวมกว่า 6,000 ชิ้น มีงานของ Dalí, Magritte, และ Basquiat</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d23518948-Reviews-Nakanoshima_Museum_of_Art_Osaka-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Museum of Oriental Ceramics</div>
+          <div class="museum-about">เซรามิกและเครื่องปั้นดินเผาญี่ปุ่นและเอเชีย โดดเด่นเรื่องเครื่องเคลือบเกาหลีและจีนหายาก</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d317754-Reviews-Museum_of_Oriental_Ceramics_Osaka-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Osaka Science Museum</div>
+          <div class="museum-about">วิทยาศาสตร์เชิงโต้ตอบ เรื่องจักรวาล เคมี ไฟฟ้า และพลังงาน มีท้องฟ้าจำลองด้วย เหมาะสำหรับทุกวัย</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d592807-Reviews-Osaka_Science_Museum-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">CupNoodles Museum Osaka</div>
+          <div class="museum-about">ประวัติและวัฒนธรรมของบะหมี่กึ่งสำเร็จรูป ทำ Cup Noodles สูตรของตัวเองได้ที่นี่ สนุกมาก</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d7076540-Reviews-Cup_Noodles_Museum_Osaka_Ikeda-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KYOTO MUSEUMS -->
+    <div class="province-block">
+      <div class="province-header">
+        <div class="province-dot" style="background:#6b3fa0"></div>
+        <div class="province-name">⛩️ เกียวโต (Kyoto)</div>
+        <div class="province-count">5 แห่ง</div>
+      </div>
+      <div class="cards-grid">
+        <div class="museum-card">
+          <div class="museum-name">Kyoto National Museum</div>
+          <div class="museum-about">ประวัติศาสตร์ญี่ปุ่นผ่านงานศิลปะและหัตถกรรม รวมสมบัติแห่งชาติหลายชิ้น ตั้งอยู่ใกล้วัดคิโยมิซุ</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d317761-Reviews-Kyoto_National_Museum-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Kyoto Municipal Museum of Art</div>
+          <div class="museum-about">งานศิลปะของศิลปินเกียวโตยุคใหม่และร่วมสมัย มีราว 3,300 ชิ้น และจัดนิทรรศการ Nitten ที่ใหญ่ที่สุดในญี่ปุ่น</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d317763-Reviews-Kyoto_City_KYOCERA_Museum_of_Art-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Miho Museum</div>
+          <div class="museum-about">ออกแบบโดย I.M. Pei ตั้งกลางภูเขา แสดงงานศิลปะญี่ปุ่นคู่กับโบราณวัตถุจากอียิปต์ กรีก และอารยธรรมโบราณอื่นๆ</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g1022741-d317932-Reviews-Miho_Museum-Koka_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Kyoto International Manga Museum</div>
+          <div class="museum-about">งานการ์ตูนมังงะญี่ปุ่นกว่า 300,000 เล่ม ประวัติและวัฒนธรรมมังงะ สามารถอ่านได้บนพื้นหญ้าด้านนอก</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d1388826-Reviews-Kyoto_International_Manga_Museum-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Nishiki Textile Museum (Nishijin)</div>
+          <div class="museum-about">ผ้าทอและสิ่งทอแบบดั้งเดิมของเกียวโต ลวดลาย Nishijin ที่มีชื่อเสียง มีสาธิตการทอผ้าและชุดกิโมโนให้ชม</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d317774-Reviews-Nishijin_Textile_Center-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NARA MUSEUMS -->
+    <div class="province-block">
+      <div class="province-header">
+        <div class="province-dot" style="background:#2d7a4f"></div>
+        <div class="province-name">🦌 นารา (Nara)</div>
+        <div class="province-count">3 แห่ง</div>
+      </div>
+      <div class="cards-grid">
+        <div class="museum-card">
+          <div class="museum-name">Nara National Museum</div>
+          <div class="museum-about">ศิลปะพุทธศาสนาญี่ปุ่น ได้แก่ พระพุทธรูป ภาพวาด ม้วนคัมภีร์ และเครื่องใช้ในพิธีกรรม เก่าแก่ตั้งแต่ปี 1889</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298198-d317759-Reviews-Nara_National_Museum-Nara_Nara_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Kofuku-ji National Treasure Museum</div>
+          <div class="museum-about">สมบัติแห่งชาติด้านพุทธศิลป์ รวมถึงรูปปั้น Ashura อายุ 1,300 ปี สามหน้าหกแขน ที่โด่งดังที่สุดในญี่ปุ่น</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298198-d8649820-Reviews-Kofukuji_National_Treasure_Museum-Nara_Nara_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Nara Prefectural Museum of Art</div>
+          <div class="museum-about">งานศิลปะสมัยใหม่ของญี่ปุ่น โดยเฉพาะจิตรกรรมสไตล์ Nihonga รวมถึงนิทรรศการหมุนเวียนตลอดปี</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.google.com/search?q=Nara+Prefectural+Museum+of+Art+review" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WAKAYAMA MUSEUMS -->
+    <div class="province-block">
+      <div class="province-header">
+        <div class="province-dot" style="background:#1a6fa8"></div>
+        <div class="province-name">🌊 วากายามะ (Wakayama)</div>
+        <div class="province-count">3 แห่ง</div>
+      </div>
+      <div class="cards-grid">
+        <div class="museum-card">
+          <div class="museum-name">Wakayama Prefectural Museum</div>
+          <div class="museum-about">ประวัติศาสตร์และโบราณวัตถุของวากายามะ วัฒนธรรมท้องถิ่น มีป้ายภาษาอังกฤษด้วย ค่าเข้าชมไม่แพง</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.google.com/search?q=Wakayama+Prefectural+Museum+review" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Wakayama Museum of Modern Art</div>
+          <div class="museum-about">ศิลปะสมัยใหม่ของญี่ปุ่น มีงานศิลปินนานาชาติชิ้นสำคัญในคอลเลคชันถาวร ตั้งอยู่ตรงข้ามปราสาทวากายามะ</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.google.com/search?q=Wakayama+Museum+of+Modern+Art+review+tripadvisor" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Koyasan Reihōkan (霊寶館)</div>
+          <div class="museum-about">สมบัติทางพุทธศิลป์ของโคยาซัน อายุกว่า 1,000 ปี รูปปั้น จิตรกรรม และของใช้ในพิธีกรรมชินงอน</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g1121285-d1890889-Reviews-Reihokan_Museum-Koya_cho_Ito_gun_Wakayama_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HIMEJI MUSEUMS -->
+    <div class="province-block">
+      <div class="province-header">
+        <div class="province-dot" style="background:#8a6b0a"></div>
+        <div class="province-name">🍢 ฮิเมจิ (Hyogo / Himeji)</div>
+        <div class="province-count">3 แห่ง</div>
+      </div>
+      <div class="cards-grid">
+        <div class="museum-card">
+          <div class="museum-name">Himeji City Museum of History</div>
+          <div class="museum-about">ประวัติศาสตร์เมืองฮิเมจิ เกราะซามูไร และโบราณวัตถุที่เกี่ยวข้องกับปราสาทฮิเมจิ ตั้งอยู่ใกล้ปราสาทมาก</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.google.com/search?q=Himeji+City+Museum+of+History+review" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Hyogo Prefectural Museum of Art</div>
+          <div class="museum-about">ศิลปะสมัยใหม่และร่วมสมัยระดับใหญ่ที่สุดในคันไซ มีงาน Rodin หลายชิ้น ตั้งริมทะเลในโกเบ</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298551-d3565196-Reviews-Hyogo_Prefectural_Museum_of_Art-Kobe_Hyogo_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Himeji City Museum of Art</div>
+          <div class="museum-about">งานศิลปะตะวันตกและญี่ปุ่น ตั้งอยู่ในอาคาร Meiji สวยงาม ราคาถูก เหมาะไปต่อหลังเที่ยวปราสาท</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.google.com/search?q=Himeji+City+Museum+of+Art+review" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MIE MUSEUMS -->
+    <div class="province-block">
+      <div class="province-header">
+        <div class="province-dot" style="background:#a83228"></div>
+        <div class="province-name">🌅 มิเอะ (Mie)</div>
+        <div class="province-count">4 แห่ง</div>
+      </div>
+      <div class="cards-grid">
+        <div class="museum-card">
+          <div class="museum-name">Mikimoto Pearl Museum</div>
+          <div class="museum-about">ทุกอย่างเกี่ยวกับไข่มุก แบ่งเป็นสองส่วน: เครื่องประดับไข่มุก และงานศิลปะที่ทำจากไข่มุก มีสาธิตการดำน้ำแบบ Ama ทุกชั่วโมง</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298195-d324880-Reviews-Mikimoto_Pearl_Island-Toba_Mie_Prefecture_Tokai_Chubu.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Kokichi Mikimoto Memorial Hall</div>
+          <div class="museum-about">ชีวประวัติของ Mikimoto Kōkichi "ราชาไข่มุก" วีดิโอและนิทรรศการเกี่ยวกับยุคเมจิและการก่อตั้งอุตสาหกรรมไข่มุก</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298195-d324880-Reviews-Mikimoto_Pearl_Island-Toba_Mie_Prefecture_Tokai_Chubu.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Toba Sea-Folk Museum</div>
+          <div class="museum-about">วิถีชีวิตชาวประมงและนักดำน้ำ Ama ของมิเอะ เรือประมงโบราณและเครื่องมือดำน้ำ มีเรือโบราณกว่า 500 ลำ</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.google.com/search?q=Toba+Sea+Folk+Museum+review" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Ise City Museum</div>
+          <div class="museum-about">ประวัติศาสตร์เมืองอิเสะ ความสัมพันธ์ระหว่างชุมชนกับศาลเจ้าอิเสะตลอด 2,000 ปี</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.google.com/search?q=Ise+City+Museum+review" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHIGA MUSEUMS -->
+    <div class="province-block">
+      <div class="province-header">
+        <div class="province-dot" style="background:#1e7a8a"></div>
+        <div class="province-name">🏔️ ทะเลสาบบิวะ / ชิกะ (Lake Biwa / Shiga)</div>
+        <div class="province-count">4 แห่ง</div>
+      </div>
+      <div class="cards-grid">
+        <div class="museum-card">
+          <div class="museum-name">Lake Biwa Museum</div>
+          <div class="museum-about">ประวัติศาสตร์ 4 ล้านปีของทะเลสาบบิวะ สิ่งมีชีวิตเฉพาะถิ่น มีพิพิธภัณฑ์สัตว์น้ำจืดที่ใหญ่ที่สุดในญี่ปุ่น รวมแมวน้ำจากทะเลสาบไบคาล</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g1121718-d317933-Reviews-Lake_Biwa_Museum-Kusatsu_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Sagawa Art Museum</div>
+          <div class="museum-about">ผลงานสามศิลปินระดับตำนานญี่ปุ่น: จิตรกร Ikuo Hirayama, ประติมากร Churyo Sato, และช่างปั้น Kichizaemon Raku ริมทะเลสาบบิวะ</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g1022741-d8560059-Reviews-Sagawa_Art_Museum-Koka_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Miho Museum (ชิกะตอนใต้)</div>
+          <div class="museum-about">ตั้งกลางภูเขา ออกแบบโดย I.M. Pei แสดงโบราณวัตถุจากหลายอารยธรรมโลกควบคู่งานศิลปะญี่ปุ่น เส้นทางเข้าถึงพิเศษมาก</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g1022741-d317932-Reviews-Miho_Museum-Koka_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+        <div class="museum-card">
+          <div class="museum-name">Hikone Castle Museum</div>
+          <div class="museum-about">เกราะและอาวุธซามูไร สมบัติของตระกูล Ii ที่ครองปราสาทฮิโกเนะ ภาพวาด ชุดเกราะ และของใช้ในราชสำนัก</div>
+          <div class="museum-footer">
+            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298204-d317930-Reviews-Hikone_Castle-Hikone_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>関西旅行</span> · คู่มือท่องเที่ยวคันไซ ญี่ปุ่น · ต้นพฤษภาคม Golden Week · 7 จังหวัด 37 ที่เที่ยว 24 พิพิธภัณฑ์
+</footer>
+
+<div class="copy-toast" id="toast">✅ คัดลอกลิงค์แล้ว!</div>
+
+<script>
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+    // Reset animation
+    document.querySelectorAll('#tab-' + name + ' .province-block').forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(16px)';
+      el.style.animation = 'none';
+      setTimeout(() => {
+        el.style.animation = `fadeUp 0.5s ease forwards ${i * 0.05}s`;
+      }, 10);
+    });
+  }
+
+  function copyLink() {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(() => {
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }).catch(() => {
+      // fallback
+      const ta = document.createElement('textarea');
+      ta.value = url;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    });
+  }
+</script>
+</body>
+</html>
