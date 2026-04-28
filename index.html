@@ -3,1235 +3,2494 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kansai Japan Guide — ที่เที่ยวและพิพิธภัณฑ์แนะนำ</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Shippori+Mincho:wght@400;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Kansai Food Guide · คู่มืออาหาร 7 วัน</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+Thai:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink: #1a1208;
-    --paper: #f5f0e8;
-    --warm: #f0e8d5;
-    --accent: #c84b11;
-    --gold: #b5882a;
-    --muted: #7a6a52;
-    --border: #d5c9b0;
-    --osaka: #c84b11;
-    --kyoto: #6b3fa0;
-    --nara: #2d7a4f;
-    --wakayama: #1a6fa8;
-    --himeji: #8a6b0a;
-    --mie: #a83228;
-    --shiga: #1e7a8a;
+:root {
+  --bg: #f5f0e8;
+  --bg-card: #fdfbf7;
+  --ink: #2a1f17;
+  --ink-soft: #5a4a3a;
+  --ink-muted: #8a7a6a;
+  --accent: #8b2d1f;
+  --accent-soft: #c9663a;
+  --gold: #b8924a;
+  --line: #d8cfc0;
+  --line-soft: #ebe3d4;
+  --shadow: 0 1px 3px rgba(42, 31, 23, 0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans Thai', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  font-weight: 400;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(184, 146, 74, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(139, 45, 31, 0.03) 0%, transparent 50%);
+  min-height: 100vh;
+}
+
+.serif {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.jp {
+  font-family: 'Noto Serif JP', serif;
+}
+
+/* ===== HEADER ===== */
+header {
+  padding: 60px 40px 40px;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+
+header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: var(--accent);
+}
+
+.subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--accent);
+  letter-spacing: 0.3em;
+  font-size: 14px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+h1 .accent {
+  color: var(--accent);
+  font-style: italic;
+}
+
+.title-jp {
+  font-family: 'Noto Serif JP', serif;
+  color: var(--ink-muted);
+  font-size: 16px;
+  letter-spacing: 0.2em;
+  margin-bottom: 20px;
+}
+
+.intro {
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ===== TAB NAVIGATION ===== */
+.tabs-wrap {
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+  border-bottom: 1px solid var(--line);
+  padding: 16px 0;
+  margin-bottom: 32px;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 0 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar { display: none; }
+
+.tab {
+  flex-shrink: 0;
+  padding: 14px 20px;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: var(--ink-muted);
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  border-radius: 0;
+  position: relative;
+  font-weight: 500;
+}
+
+.tab .day-num {
+  display: block;
+  font-size: 11px;
+  font-family: 'Noto Sans Thai', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 4px;
+  opacity: 0.6;
+}
+
+.tab .day-date {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.tab:hover {
+  color: var(--ink);
+  background: var(--line-soft);
+}
+
+.tab.active {
+  color: var(--accent);
+  background: var(--bg-card);
+  border-color: var(--line);
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -17px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+/* ===== MAIN CONTENT ===== */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+.day-content {
+  display: none;
+  animation: fadeIn 0.5s ease;
+}
+
+.day-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== DAY HEADER ===== */
+.day-header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 40px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  position: relative;
+}
+
+.day-header::before,
+.day-header::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--accent);
+}
+
+.day-header::before {
+  top: 12px;
+  left: 12px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.day-header::after {
+  bottom: 12px;
+  right: 12px;
+  border-left: none;
+  border-top: none;
+}
+
+.day-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--accent);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.day-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.day-route {
+  font-size: 14px;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* ===== SECTION ===== */
+.section {
+  margin-bottom: 48px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.section-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--accent);
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.section-subtitle {
+  font-size: 13px;
+  color: var(--ink-muted);
+  margin-top: 2px;
+}
+
+/* ===== TRIP TIMELINE ===== */
+.timeline {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  padding: 28px;
+}
+
+.timeline-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 24px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line-soft);
+  align-items: start;
+}
+
+.timeline-row:last-child { border-bottom: none; }
+
+.timeline-time {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--accent);
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0.05em;
+}
+
+.timeline-activity {
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.timeline-activity strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.timeline-note {
+  font-size: 12px;
+  color: var(--ink-muted);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+/* ===== FOOD SECTION ===== */
+.meal-block {
+  margin-bottom: 36px;
+  position: relative;
+}
+
+.meal-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--line);
+}
+
+.meal-time {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--gold);
+  font-size: 16px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.meal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.meal-context {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+/* Restaurant Table */
+.rest-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+  font-size: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+}
+
+.rest-table thead {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.rest-table th {
+  padding: 12px 14px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.rest-table td {
+  padding: 14px;
+  border-bottom: 1px solid var(--line-soft);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.rest-table tr:last-child td { border-bottom: none; }
+
+.rest-table tr:hover { background: var(--line-soft); }
+
+.rest-name {
+  font-weight: 500;
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.rest-name .star {
+  color: var(--accent);
+  margin-left: 4px;
+}
+
+.rest-jp {
+  font-family: 'Noto Serif JP', serif;
+  color: var(--ink-muted);
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.menu-list {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.menu-list .highlight {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.price-tag {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.location-tag {
+  font-size: 12px;
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+/* ===== SUMMARY ===== */
+.summary {
+  background: linear-gradient(135deg, var(--bg-card) 0%, #f5ede0 100%);
+  border: 1px solid var(--line);
+  padding: 32px;
+  margin-top: 40px;
+  position: relative;
+}
+
+.summary-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--accent);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+
+.summary-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.summary-table {
+  width: 100%;
+  font-size: 13px;
+}
+
+.summary-table tr td {
+  padding: 8px 0;
+  border-bottom: 1px dotted var(--line);
+}
+
+.summary-table tr:last-child td {
+  border-bottom: none;
+  padding-top: 14px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.summary-table .label-col {
+  color: var(--ink-soft);
+}
+
+.summary-table .meal-col {
+  color: var(--ink);
+}
+
+.summary-table .price-col {
+  text-align: right;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ===== TIPS ===== */
+.tips {
+  margin-top: 36px;
+  padding: 28px;
+  background: var(--bg-card);
+  border-left: 4px solid var(--accent);
+}
+
+.tips-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.tip-item {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.tip-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.tip-item strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* ===== WARNING ===== */
+.warning {
+  background: #fdf4e8;
+  border-left: 4px solid var(--accent-soft);
+  padding: 16px 20px;
+  margin: 20px 0;
+  font-size: 13px;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.warning strong {
+  color: var(--accent);
+  font-style: normal;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  header { padding: 40px 20px 30px; }
+  .timeline { padding: 20px; }
+  .timeline-row { grid-template-columns: 70px 1fr; gap: 14px; }
+  .timeline-time { font-size: 14px; }
+  .rest-table { font-size: 13px; }
+  .rest-table th, .rest-table td { padding: 10px 8px; }
+  .rest-table thead { display: none; }
+  .rest-table tr {
+    display: block;
+    margin-bottom: 14px;
+    border: 1px solid var(--line);
   }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Sarabun', 'Noto Serif JP', serif;
-    background: var(--paper);
-    color: var(--ink);
-    min-height: 100vh;
+  .rest-table td {
+    display: block;
+    border-bottom: 1px solid var(--line-soft);
   }
-
-  /* HERO */
-  .hero {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 80px 40px 60px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse at 20% 50%, rgba(200,75,17,0.15) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 50%, rgba(107,63,160,0.12) 0%, transparent 60%);
-  }
-
-  .hero-jp {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(2.5rem, 8vw, 5rem);
-    font-weight: 700;
+  .rest-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 10px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--gold);
-    line-height: 1;
-    position: relative;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.8s ease forwards 0.2s;
+    margin-bottom: 4px;
+    font-weight: 500;
   }
+  .summary { padding: 20px; }
+  .meal-header { flex-direction: column; gap: 4px; align-items: flex-start; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .section-num { font-size: 28px; }
+  .section-title { font-size: 22px; }
+}
 
-  .hero-th {
-    font-family: 'Sarabun', sans-serif;
-    font-size: clamp(1rem, 3vw, 1.4rem);
-    font-weight: 300;
-    color: rgba(245,240,232,0.7);
-    margin-top: 12px;
-    letter-spacing: 0.05em;
-    position: relative;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.5s;
-  }
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--ink-muted);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  border-top: 1px solid var(--line);
+}
 
-  .hero-meta {
-    display: flex;
-    justify-content: center;
-    gap: 32px;
-    margin-top: 32px;
-    flex-wrap: wrap;
-    position: relative;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.7s;
-  }
+footer .by {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--accent);
+  margin-top: 8px;
+}
 
-  .hero-pill {
-    background: rgba(181,136,42,0.2);
-    border: 1px solid rgba(181,136,42,0.4);
-    color: var(--gold);
-    padding: 6px 18px;
-    border-radius: 100px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-  }
+.placeholder-day {
+  text-align: center;
+  padding: 80px 20px;
+  background: var(--bg-card);
+  border: 1px dashed var(--line);
+}
 
-  /* SHARE BAR */
-  .share-bar {
-    background: var(--warm);
-    border-bottom: 1px solid var(--border);
-    padding: 12px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
+.placeholder-day .ph-icon {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 60px;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
 
-  .share-label {
-    font-size: 0.85rem;
-    color: var(--muted);
-    font-weight: 600;
-  }
+.placeholder-day h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  color: var(--ink);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
 
-  .share-btns {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .share-btn {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s ease;
-    font-family: 'Sarabun', sans-serif;
-    text-decoration: none;
-  }
-
-  .btn-copy {
-    background: var(--ink);
-    color: var(--paper);
-  }
-  .btn-copy:hover { background: #333; transform: translateY(-1px); }
-
-  .btn-line {
-    background: #06C755;
-    color: white;
-  }
-  .btn-line:hover { background: #05b34c; transform: translateY(-1px); }
-
-  .btn-fb {
-    background: #1877F2;
-    color: white;
-  }
-  .btn-fb:hover { background: #1565d8; transform: translateY(-1px); }
-
-  .btn-x {
-    background: #000;
-    color: white;
-  }
-  .btn-x:hover { background: #333; transform: translateY(-1px); }
-
-  .copy-toast {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: var(--ink);
-    color: var(--paper);
-    padding: 12px 24px;
-    border-radius: 10px;
-    font-size: 0.9rem;
-    transform: translateY(80px);
-    opacity: 0;
-    transition: all 0.3s ease;
-    z-index: 999;
-    pointer-events: none;
-  }
-  .copy-toast.show { transform: translateY(0); opacity: 1; }
-
-  /* TABS */
-  .tabs-wrapper {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--paper);
-    border-bottom: 2px solid var(--border);
-    padding: 0 40px;
-  }
-
-  .tabs {
-    display: flex;
-    gap: 0;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .tab-btn {
-    padding: 18px 32px;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    cursor: pointer;
-    border: none;
-    background: transparent;
-    color: var(--muted);
-    border-bottom: 3px solid transparent;
-    margin-bottom: -2px;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-  }
-
-  .tab-btn.active {
-    color: var(--ink);
-    border-bottom-color: var(--accent);
-  }
-
-  .tab-btn:hover:not(.active) {
-    color: var(--ink);
-  }
-
-  /* MAIN CONTENT */
-  .content {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 48px 40px;
-  }
-
-  .tab-panel { display: none; }
-  .tab-panel.active { display: block; }
-
-  /* PROVINCE SECTION */
-  .province-block {
-    margin-bottom: 56px;
-    opacity: 0;
-    transform: translateY(16px);
-    animation: fadeUp 0.5s ease forwards;
-  }
-
-  .province-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 20px;
-    padding-bottom: 16px;
-    border-bottom: 2px solid var(--border);
-  }
-
-  .province-dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .province-name {
-    font-family: 'Shippori Mincho', serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-  }
-
-  .province-count {
-    margin-left: auto;
-    font-size: 0.8rem;
-    color: var(--muted);
-    background: var(--warm);
-    border: 1px solid var(--border);
-    padding: 4px 12px;
-    border-radius: 100px;
-    white-space: nowrap;
-  }
-
-  /* CARDS GRID */
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 16px;
-  }
-
-  .card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    transition: all 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(26,18,8,0.1);
-    border-color: rgba(26,18,8,0.2);
-  }
-
-  .card-name {
-    font-size: 0.95rem;
-    font-weight: 700;
-    line-height: 1.4;
-  }
-
-  .card-reason {
-    font-size: 0.83rem;
-    color: var(--muted);
-    line-height: 1.6;
-    flex: 1;
-  }
-
-  .card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 10px;
-    border-top: 1px solid var(--border);
-    margin-top: auto;
-  }
-
-  .card-time {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--muted);
-  }
-
-  .review-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: var(--accent);
-    text-decoration: none;
-    padding: 5px 12px;
-    border: 1.5px solid var(--accent);
-    border-radius: 100px;
-    transition: all 0.2s ease;
-  }
-
-  .review-link:hover {
-    background: var(--accent);
-    color: white;
-  }
-
-  /* MUSEUM CARDS */
-  .museum-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    transition: all 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .museum-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(26,18,8,0.1);
-  }
-
-  .museum-name {
-    font-size: 0.95rem;
-    font-weight: 700;
-    line-height: 1.4;
-  }
-
-  .museum-about {
-    font-size: 0.83rem;
-    color: var(--muted);
-    line-height: 1.6;
-    flex: 1;
-  }
-
-  .museum-footer {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-top: 10px;
-    border-top: 1px solid var(--border);
-    margin-top: auto;
-  }
-
-  /* SEASON NOTE */
-  .season-banner {
-    background: linear-gradient(135deg, #fff8ed, #fff0f0);
-    border: 1px solid #f5d5a0;
-    border-radius: 12px;
-    padding: 20px 24px;
-    margin-bottom: 40px;
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-  }
-
-  .season-icon { font-size: 1.8rem; flex-shrink: 0; }
-
-  .season-text { font-size: 0.88rem; line-height: 1.7; color: #7a4a10; }
-  .season-text strong { color: #b5400a; }
-
-  /* GRUTTO TIP */
-  .tip-banner {
-    background: linear-gradient(135deg, #eef3ff, #f0fff4);
-    border: 1px solid #b8cff5;
-    border-radius: 12px;
-    padding: 20px 24px;
-    margin-bottom: 40px;
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-  }
-
-  .tip-text { font-size: 0.88rem; line-height: 1.7; color: #2a4a7a; }
-  .tip-text strong { color: #1a3a6a; }
-
-  /* ANIMATION */
-  @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .province-block:nth-child(1) { animation-delay: 0.05s; }
-  .province-block:nth-child(2) { animation-delay: 0.1s; }
-  .province-block:nth-child(3) { animation-delay: 0.15s; }
-  .province-block:nth-child(4) { animation-delay: 0.2s; }
-  .province-block:nth-child(5) { animation-delay: 0.25s; }
-  .province-block:nth-child(6) { animation-delay: 0.3s; }
-  .province-block:nth-child(7) { animation-delay: 0.35s; }
-
-  /* FOOTER */
-  footer {
-    background: var(--ink);
-    color: var(--muted);
-    text-align: center;
-    padding: 32px;
-    font-size: 0.82rem;
-    margin-top: 60px;
-  }
-
-  footer span { color: var(--gold); }
-
-  @media (max-width: 600px) {
-    .hero { padding: 60px 20px 40px; }
-    .share-bar { padding: 12px 20px; }
-    .tabs-wrapper { padding: 0 16px; }
-    .content { padding: 32px 20px; }
-    .tab-btn { padding: 16px 16px; font-size: 0.88rem; }
-    .cards-grid { grid-template-columns: 1fr; }
-  }
+.placeholder-day p {
+  color: var(--ink-soft);
+  font-size: 14px;
+  max-width: 500px;
+  margin: 0 auto;
+}
 </style>
 </head>
 <body>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-jp">関西旅行ガイド</div>
-  <div class="hero-th">คู่มือท่องเที่ยวคันไซ ญี่ปุ่น · ต้นพฤษภาคม (Golden Week)</div>
-  <div class="hero-meta">
-    <span class="hero-pill">✈️ เดินทาง 7 วัน</span>
-    <span class="hero-pill">🛬 เข้า KIX</span>
-    <span class="hero-pill">🌸 Golden Week</span>
-    <span class="hero-pill">🗾 7 จังหวัด</span>
-  </div>
-</div>
+<header>
+  <div class="subtitle">A Culinary Journey · 7 Days</div>
+  <h1>Kansai <span class="accent">Food Guide</span></h1>
+  <div class="title-jp">関西 · 食の旅</div>
+  <p class="intro">คู่มืออาหารจากปลายแหลมวากายามะถึงเกียวโต — ทุกร้าน ทุกเมนู ทุกราคา ที่คัดสรรมาแล้วสำหรับทริป 2-9 พฤษภาคม 2026</p>
+</header>
 
-<!-- SHARE BAR -->
-<div class="share-bar">
-  <span class="share-label">📤 แชร์ให้เพื่อน</span>
-  <div class="share-btns">
-    <button class="share-btn btn-copy" onclick="copyLink()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-      คัดลอกลิงค์
-    </button>
-    <a class="share-btn btn-line" href="https://social-plugins.line.me/lineit/share?url=https://japan-kansai-guide.netlify.app" target="_blank">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.105.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
-      LINE
-    </a>
-    <a class="share-btn btn-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://japan-kansai-guide.netlify.app" target="_blank">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-      Facebook
-    </a>
-    <a class="share-btn btn-x" href="https://twitter.com/intent/tweet?text=คู่มือท่องเที่ยวคันไซ+7+วัน+Golden+Week+🇯🇵&url=https://japan-kansai-guide.netlify.app" target="_blank">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      X
-    </a>
-  </div>
-</div>
-
-<!-- TABS -->
-<div class="tabs-wrapper">
+<div class="tabs-wrap">
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('attractions', this)">🗺️ ที่เที่ยว (37 แห่ง)</button>
-    <button class="tab-btn" onclick="switchTab('museums', this)">🏛️ พิพิธภัณฑ์ (24 แห่ง)</button>
+    <button class="tab active" data-day="1">
+      <span class="day-num">Day One</span>
+      <span class="day-date">2 May</span>
+    </button>
+    <button class="tab" data-day="2">
+      <span class="day-num">Day Two</span>
+      <span class="day-date">3 May</span>
+    </button>
+    <button class="tab" data-day="3">
+      <span class="day-num">Day Three</span>
+      <span class="day-date">4 May</span>
+    </button>
+    <button class="tab" data-day="4">
+      <span class="day-num">Day Four</span>
+      <span class="day-date">5 May</span>
+    </button>
+    <button class="tab" data-day="5">
+      <span class="day-num">Day Five</span>
+      <span class="day-date">6 May</span>
+    </button>
+    <button class="tab" data-day="6">
+      <span class="day-num">Day Six</span>
+      <span class="day-date">7 May</span>
+    </button>
+    <button class="tab" data-day="7">
+      <span class="day-num">Day Seven</span>
+      <span class="day-date">8 May</span>
+    </button>
   </div>
 </div>
 
-<!-- CONTENT -->
-<div class="content">
+<div class="container">
 
-  <!-- TAB: ATTRACTIONS -->
-  <div class="tab-panel active" id="tab-attractions">
-
-    <div class="season-banner">
-      <div class="season-icon">🌸</div>
-      <div class="season-text">
-        <strong>ช่วง Golden Week (ต้นพฤษภาคม)</strong> — ดอกเด่นคือ <strong>藤 Wisteria</strong> สีม่วงระย้า และ <strong>Azalea</strong> สีชมพูแดง สถานที่ยอดนิยมอย่าง Fushimi Inari, Arashiyama, Kinkakuji จะ<strong>คนแน่นมาก</strong> แนะนำไปก่อน 7–8 โมงเช้า
-      </div>
+  <!-- ============= DAY 1 ============= -->
+  <div class="day-content active" id="day-1">
+    <div class="day-header">
+      <div class="day-label">Saturday · 02 May 2026</div>
+      <h2 class="day-title">Wakayama's Southern Coast</h2>
+      <p class="day-route">KIX Airport → Kishi → Toretore → Sandanbeki → Nachi Falls → Hotel Nami</p>
     </div>
 
-    <!-- OSAKA -->
-    <div class="province-block">
-      <div class="province-header">
-        <div class="province-dot" style="background:#c84b11"></div>
-        <div class="province-name">🏯 โอซาก้า (Osaka)</div>
-        <div class="province-count">5 แห่ง</div>
+    <!-- Trip Section -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">i.</div>
+        <div>
+          <div class="section-title">Trip Itinerary</div>
+          <div class="section-subtitle">เส้นทางและกิจกรรม</div>
+        </div>
       </div>
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-name">ปราสาทโอซาก้า + สวนรอบปราสาท (Osaka Castle Park)</div>
-          <div class="card-reason">สัญลักษณ์ของโอซาก้า ช่วงพฤษภาดอกไม้รอบปราสาทสวยมาก</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 2–3 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d320963-Reviews-Osaka_Castle-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
+      <div class="timeline">
+        <div class="timeline-row">
+          <div class="timeline-time">07:55</div>
+          <div class="timeline-activity"><strong>ลงเครื่องที่ KIX Airport</strong><div class="timeline-note">รับรถที่ KIX (รับรถที่เช่าไว้)</div></div>
         </div>
-        <div class="card">
-          <div class="card-name">ชินเซไกและสวนเทนโนจิ (Shinsekai / Tennoji)</div>
-          <div class="card-reason">ย่านเก่าแก่บรรยากาศย้อนยุค กิน kushikatsu เมนูดังของโอซาก้า</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 2–3 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d1374786-Reviews-Shinsekai-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
+        <div class="timeline-row">
+          <div class="timeline-time">09:00</div>
+          <div class="timeline-activity"><strong>KIX → Kishi Station</strong> — สถานีแมว Tama</div>
         </div>
-        <div class="card">
-          <div class="card-name">โดทมบอริ + ชินไซบาชิ (Dotonbori / Shinsaibashi)</div>
-          <div class="card-reason">หัวใจของโอซาก้า กิน street food เดิน ถ่ายรูป ช้อปปิ้ง ดีที่สุดช่วงเย็น-ค่ำ</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 3–4 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d1373070-Reviews-Dotonbori-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
+        <div class="timeline-row">
+          <div class="timeline-time">10:30</div>
+          <div class="timeline-activity"><strong>Toretore Ichiba</strong> ⭐<div class="timeline-note">ตลาดปลา + Maguro Carving Show รอบ 11:00</div></div>
         </div>
-        <div class="card">
-          <div class="card-name">คุโรมอน อิจิบะ (Kuromon Ichiba Market)</div>
-          <div class="card-reason">ตลาดสดที่คนญี่ปุ่นและนักท่องเที่ยวชอบ อาหารทะเลสด ราคาโอเค</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d1373069-Reviews-Kuromon_Ichiba_Market-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
+        <div class="timeline-row">
+          <div class="timeline-time">13:00</div>
+          <div class="timeline-activity"><strong>Sandanbeki Cave</strong> — หน้าผาริมทะเล</div>
         </div>
-        <div class="card">
-          <div class="card-name">อุเมดะ (Umeda)</div>
-          <div class="card-reason">ช้อปปิ้งครบ ขึ้น Sky Building ชมวิวเมืองได้ด้วย</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 2–3 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d592808-Reviews-Umeda_Sky_Building-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
+        <div class="timeline-row">
+          <div class="timeline-time">14:00</div>
+          <div class="timeline-activity"><strong>Nachi Waterfall</strong> ⭐<div class="timeline-note">⚠️ Pagoda ปิด 16:00 / Waterfall viewpoint ปิด 17:00</div></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">17:30</div>
+          <div class="timeline-activity"><strong>เช็คอิน Hotel Nami</strong></div>
         </div>
       </div>
     </div>
 
-    <!-- KYOTO -->
-    <div class="province-block">
-      <div class="province-header">
-        <div class="province-dot" style="background:#6b3fa0"></div>
-        <div class="province-name">⛩️ เกียวโต (Kyoto)</div>
-        <div class="province-count">11 แห่ง</div>
+    <!-- Food Section -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">ii.</div>
+        <div>
+          <div class="section-title">Food Guide</div>
+          <div class="section-subtitle">ของกินวันนี้</div>
+        </div>
       </div>
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-name">ฟูชิมิ อินาริ (Fushimi Inari)</div>
-          <div class="card-reason">โทริอิสีส้มพันๆ ต้น ไอคอนิกที่สุดของเกียวโต ไปเช้ามากๆ คนน้อยกว่า</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 2–3 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d320048-Reviews-Fushimi_Inari_Taisha-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
+
+      <!-- Breakfast -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Morning</div>
+          <div class="meal-title">มื้อเช้า · ที่ KIX Airport</div>
         </div>
-        <div class="card">
-          <div class="card-name">อาราชิยามะ: ป่าไผ่ + วัดเทนริวจิ (Arashiyama)</div>
-          <div class="card-reason">ป่าไผ่บรรยากาศเงียบสงบ + วัดสวนสวย ริมแม่น้ำโออิ</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 3–4 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d320058-Reviews-Arashiyama-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
+        <div class="meal-context">หลังลงเครื่อง 7:55 ก่อนรับรถ — กินเบาๆ ก่อนวิ่งยาว</div>
+        <table class="rest-table">
+          <thead>
+            <tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">KINSHA <span class="star">★</span></div><div class="rest-jp">近匠</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Tonkatsu Set</span>, เซ็ตข้าวเช้าญี่ปุ่น</td>
+              <td data-label="ราคา" class="price-tag">1,200-1,800 ¥</td>
+              <td data-label="Location" class="location-tag">KIX Terminal 1, ชั้น 3 (Aeroplaza) · เปิด 7:00-22:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Lawson / FamilyMart</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Onigiri</span>, Nikuman, ชาเขียว — กินบนรถได้</td>
+              <td data-label="ราคา" class="price-tag">500-700 ¥</td>
+              <td data-label="Location" class="location-tag">ใน KIX · 24 ชม.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Lunch -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Afternoon</div>
+          <div class="meal-title">มื้อเที่ยง · Toretore Ichiba</div>
         </div>
-        <div class="card">
-          <div class="card-name">คินคาคุจิ วัดทองคำ (Kinkaku-ji)</div>
-          <div class="card-reason">วัดชุบทองสะท้อนในสระน้ำ หนึ่งในภาพที่โด่งดังที่สุดของญี่ปุ่น</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1.5 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d320030-Reviews-Kinkaku_ji_Temple-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
+        <div class="meal-context">⭐ ไฮไลต์ของวัน! ตลาดปลาที่ใหญ่ที่สุดในวากายามะใต้ ทูน่าสดมาก ราคาถูก</div>
+        <table class="rest-table">
+          <thead>
+            <tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Toretore Sushi <span class="star">★</span></div><div class="rest-jp">とれとれ寿司</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Otoro</span>, <span class="highlight">Kaisendon</span>, Maguro Sashimi Set, Akami</td>
+              <td data-label="ราคา" class="price-tag">1,800-3,000 ¥</td>
+              <td data-label="Location" class="location-tag">ในตลาด Toretore · 11:00-15:00, 17:00-20:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">ฟู้ดคอร์ทตลาด</div></td>
+              <td data-label="ของควรลอง" class="menu-list">ซื้อจากแผงต่างๆ มาแชร์ — Mehari Sushi, Maguro Yukke, Kabuto-yaki, Iseebi</td>
+              <td data-label="ราคา" class="price-tag">1,500-2,500 ¥</td>
+              <td data-label="Location" class="location-tag">ในตลาด · 9:00-18:30</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="warning"><strong>เคล็ดลับ:</strong> ดู Maguro Carving Show รอบ 11:00 — ทูน่าหลังโชว์สดที่สุด ซื้อมาแล้วนั่งกินในฟู้ดคอร์ทได้!</div>
+      </div>
+
+      <!-- Snack -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Late Afternoon</div>
+          <div class="meal-title">ของว่าง · ที่ Nachi</div>
         </div>
-        <div class="card">
-          <div class="card-name">กิออน + ถนนนิเนนซากะ (Gion / Ninenzaka)</div>
-          <div class="card-reason">ย่านเกอิชา ถนนหินโบราณ บรรยากาศญี่ปุ่นคลาสสิก</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 2–3 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d1850534-Reviews-Ninenzaka-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
+        <table class="rest-table">
+          <thead>
+            <tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Hiro-no-chaya</div><div class="rest-jp">飛瀧の茶屋</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Mehari Sushi</span>, ชาเขียว, Anmitsu</td>
+              <td data-label="ราคา" class="price-tag">600-1,000 ¥</td>
+              <td data-label="Location" class="location-tag">จุดชมวิวน้ำตก Nachi · 8:00-16:00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Dinner -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Evening</div>
+          <div class="meal-title">มื้อเย็น · ใกล้ Hotel Nami</div>
         </div>
-        <div class="card">
-          <div class="card-name">วัดคิโยมิซุเดระ (Kiyomizudera)</div>
-          <div class="card-reason">วัดบนหน้าผา ระเบียงไม้ชมวิวเมืองเกียวโต เก่าแก่กว่า 1,200 ปี</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1.5–2 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d320012-Reviews-Kiyomizudera_Temple-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">นิโจ้ คาสเซิล (Nijo Castle)</div>
-          <div class="card-reason">ปราสาทโชกุน พื้นร้องเสียงนกไนติงเกล ภาพวาดทองในอาคารงดงาม</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1.5–2 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d320024-Reviews-Nijo_Castle-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">ฟิโลโซเฟอร์ส พาธ (Philosopher's Path)</div>
-          <div class="card-reason">ทางเดินริมคลองร่มรื่น เชื่อมวัดหลายแห่ง บรรยากาศดีมาก</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1–1.5 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d1372674-Reviews-Philosopher_s_Path-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">อุจิ: วัดเบียวโดอิน + ชาเขียว (Uji / Byodoin)</div>
-          <div class="card-reason">วัดติดภาพเหรียญ 10 เยน + แหล่งชาเขียวที่ดีที่สุดของญี่ปุ่น</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 2–3 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298559-d317813-Reviews-Byodo_in_Temple-Uji_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">วัดนินนาจิ ดอก Wisteria (Ninnaji)</div>
-          <div class="card-reason">ดอก Wisteria สีม่วงระย้าบานช่วงต้นพฤษภา สวยมาก 🌸</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1.5 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d320028-Reviews-Ninnaji_Temple-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">อาโออิ มัตสึริ (Aoi Matsuri — 15 พ.ค.)</div>
-          <div class="card-reason">ขบวนแห่เก่าแก่กว่า 1,400 ปี ชุดราชสำนักเฮอัน ถ้าวันตรงควรดูมาก</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 2–3 ชม.</div>
-            <a class="review-link" href="https://www.google.com/search?q=Aoi+Matsuri+Kyoto+review" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
+        <div class="meal-context">เลือก 1 ร้าน — Hotel Nami ไม่มี dinner plan รวม</div>
+        <table class="rest-table">
+          <thead>
+            <tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Ichirin <span class="star">★</span></div><div class="rest-jp">いちりん</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Stone Grilled Eel</span> (3 แบบ), Tuna Sushi, Tempura, Agedashi Tofu</td>
+              <td data-label="ราคา" class="price-tag">2,500-3,500 ¥</td>
+              <td data-label="Location" class="location-tag">2-2-6 Tsukiji · ใกล้ Kii-Katsuura Station</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Maguro Zanmai Nachi <span class="star">★</span></div><div class="rest-jp">まぐろ三昧 那智</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Kumano-gyu Yakiniku Set</span>, Negitoro-don, Whale Ham</td>
+              <td data-label="ราคา" class="price-tag">3,000-4,000 ¥</td>
+              <td data-label="Location" class="location-tag">2-3-10 Tsukiji · 11:30-21:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Bodai</div><div class="rest-jp">ぼだい</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Chutoro Tuna Cutlet</span>, Tuna Sashimi</td>
+              <td data-label="ราคา" class="price-tag">3,500-5,000 ¥</td>
+              <td data-label="Location" class="location-tag">5-1-3 Tsukiji · 15 วินาทีจากสถานี</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Katsuragi</div><div class="rest-jp">かつぎ</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Tuna Neck Ramen</span>, Tuna Cutlet</td>
+              <td data-label="ราคา" class="price-tag">2,500-3,500 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ Kii-Katsuura Station</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Kitchen Nicori</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Nachikatsu Pizza</span> (พิซซ่าทูน่า!), Local Game Meat</td>
+              <td data-label="ราคา" class="price-tag">3,000-4,500 ¥</td>
+              <td data-label="Location" class="location-tag">5-2-33 Tsukiji · 18:00-21:30 (ปิดอา-จ)</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
-    <!-- NARA -->
-    <div class="province-block">
-      <div class="province-header">
-        <div class="province-dot" style="background:#2d7a4f"></div>
-        <div class="province-name">🦌 นารา (Nara)</div>
-        <div class="province-count">6 แห่ง</div>
-      </div>
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-name">สวนนารา + กวางป่า (Nara Park)</div>
-          <div class="card-reason">กวางศักดิ์สิทธิ์เดินอิสระทั่วสวน ให้อาหารได้ใกล้ชิดมาก</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1–2 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298198-d320337-Reviews-Nara_Park-Nara_Nara_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">วัดโทไดจิ (Todai-ji)</div>
-          <div class="card-reason">พระพุทธรูปสำริดใหญ่ที่สุดในโลก อาคารไม้ใหญ่ที่สุดในโลกด้วย</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1–1.5 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298198-d320316-Reviews-Todaiji_Temple-Nara_Nara_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">คาสุกะ ไทชา (Kasuga Taisha)</div>
-          <div class="card-reason">ศาลเจ้ากลางป่า โคมไฟพันดวงบรรยากาศศักดิ์สิทธิ์</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298198-d320338-Reviews-Kasuga_Grand_Shrine-Nara_Nara_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">ย่านนาราชิ (Naramachi)</div>
-          <div class="card-reason">ย่านพ่อค้าเก่าแก่ ร้านขนม ร้านคราฟต์ เดินเล่นชิลล์</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298198-d598272-Reviews-Naramachi-Nara_Nara_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">ศาลเจ้าอิซะกาวะ Wisteria Festival (Isagawa Shrine)</div>
-          <div class="card-reason">เทศกาลดอก Wisteria เก่าแก่ที่สุดในญี่ปุ่น จัดช่วงต้นพฤษภา 🌸</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1–1.5 ชม.</div>
-            <a class="review-link" href="https://www.google.com/search?q=Isagawa+Shrine+Wisteria+Nara+review" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">โยชิโนะ (Yoshino)</div>
-          <div class="card-reason">ภูเขาดอกไม้ ดอกอาซาเล่ยบานต่อจากซากุระ วิวสวยมาก</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ ครึ่งวัน</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g1121290-d1390869-Reviews-Yoshino_Mountain-Yoshino_cho_Yoshino_gun_Nara_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-      </div>
+    <!-- Summary -->
+    <div class="summary">
+      <div class="summary-label">Daily Cost Summary</div>
+      <div class="summary-title">สรุปงบประมาณวันที่ 2 พ.ค.</div>
+      <table class="summary-table">
+        <tr><td class="label-col">เช้า</td><td class="meal-col">Lawson @ KIX</td><td class="price-col">500 ¥</td></tr>
+        <tr><td class="label-col">เที่ยง</td><td class="meal-col">Toretore Sushi + Maguro Show</td><td class="price-col">2,000 ¥</td></tr>
+        <tr><td class="label-col">ของว่าง</td><td class="meal-col">Hiro-no-chaya @ Nachi</td><td class="price-col">600 ¥</td></tr>
+        <tr><td class="label-col">เย็น</td><td class="meal-col">Ichirin / Maguro Zanmai</td><td class="price-col">3,000-4,000 ¥</td></tr>
+        <tr><td class="label-col"><strong>รวม/คน</strong></td><td class="meal-col"></td><td class="price-col">~6,100-7,100 ¥</td></tr>
+      </table>
     </div>
 
-    <!-- WAKAYAMA -->
-    <div class="province-block">
-      <div class="province-header">
-        <div class="province-dot" style="background:#1a6fa8"></div>
-        <div class="province-name">🌊 วากายามะ (Wakayama)</div>
-        <div class="province-count">5 แห่ง</div>
-      </div>
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-name">โคยาซัน (Koyasan)</div>
-          <div class="card-reason">ศูนย์กลางพุทธศาสนาชินงอน สุสานโอคุโนะอิน บรรยากาศลึกลับศักดิ์สิทธิ์</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 3–4 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g1121285-d317914-Reviews-Okunoin-Koya_cho_Ito_gun_Wakayama_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">ปราสาทวากายามะ (Wakayama Castle)</div>
-          <div class="card-reason">ปราสาทริมทะเล วิวดี สวนรอบปราสาทสวย</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1.5 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298202-d317918-Reviews-Wakayama_Castle-Wakayama_Wakayama_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">คุมาโน่ โคโด้ (Kumano Kodo)</div>
-          <div class="card-reason">เส้นทางแสวงบุญมรดกโลก เดินป่าในธรรมชาติร่มรื่น</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ ครึ่งวัน–เต็มวัน</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g1022854-d1214548-Reviews-Kumano_Kodo-Tanabe_Wakayama_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">ชิราฮามะ (Shirahama Beach)</div>
-          <div class="card-reason">หาดทรายขาวชายทะเล น้ำใสสะอาด เริ่มสวยช่วงต้นพฤษภา</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 2–3 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298205-d317943-Reviews-Shirahama_Beach-Shirahama_cho_Nishimuro_gun_Wakayama_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">สวนดอกไม้ฮานะโนะมิยาโกะ (Hana no Miyako)</div>
-          <div class="card-reason">ดอกไม้ฤดูใบไม้ผลิหลากสี บานพร้อมกันช่วงนี้ 🌸</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1.5 ชม.</div>
-            <a class="review-link" href="https://www.google.com/search?q=Hana+no+Miyako+Wakayama+review" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- HIMEJI -->
-    <div class="province-block">
-      <div class="province-header">
-        <div class="province-dot" style="background:#8a6b0a"></div>
-        <div class="province-name">🍢 ฮิเมจิ (Hyogo / Himeji)</div>
-        <div class="province-count">3 แห่ง</div>
-      </div>
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-name">ปราสาทฮิเมจิ (Himeji Castle)</div>
-          <div class="card-reason">ปราสาทที่สวยที่สุดในญี่ปุ่น มรดกโลก UNESCO สีขาวโดดเด่นมาก</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 2–3 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298553-d320003-Reviews-Himeji_Castle-Himeji_Hyogo_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">สวนโคโคเอ็น (Koko-en Garden)</div>
-          <div class="card-reason">สวนญี่ปุ่นสไตล์เอโดะ อยู่ติดปราสาท ไปต่อได้เลย</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298553-d317758-Reviews-Koko_en_Garden-Himeji_Hyogo_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">สวน Wisteria วัดยุเมซากิ (Yumesakibashi)</div>
-          <div class="card-reason">ดอก Wisteria ระย้าสีม่วงสวยงาม นิยมมากช่วง Golden Week 🌸</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1 ชม.</div>
-            <a class="review-link" href="https://www.google.com/search?q=Yumesakibashi+wisteria+Himeji+review" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- MIE -->
-    <div class="province-block">
-      <div class="province-header">
-        <div class="province-dot" style="background:#a83228"></div>
-        <div class="province-name">🌅 มิเอะ (Mie)</div>
-        <div class="province-count">5 แห่ง</div>
-      </div>
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-name">ศาลเจ้าอิเสะ (Ise Jingu) ชั้นในและชั้นนอก</div>
-          <div class="card-reason">ศาลเจ้าศักดิ์สิทธิ์ที่สุดของญี่ปุ่น อายุกว่า 2,000 ปี</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 2–3 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298196-d317819-Reviews-Ise_Jingu_Grand_Shrine-Ise_Mie_Prefecture_Tokai_Chubu.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">โอะกาเกะ-โชะ (Okage-yokocho)</div>
-          <div class="card-reason">ถนนเก่าสไตล์เอโดะ กิน akafuku mochi ขนมดังประจำอิเสะ</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1–1.5 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298196-d1380064-Reviews-Okage_Yokocho-Ise_Mie_Prefecture_Tokai_Chubu.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">อ่าวอากะ + ไข่มุก Mikimoto (Ago Bay)</div>
-          <div class="card-reason">ล่องเรือชมอ่าว แหล่งกำเนิดไข่มุกเพาะเลี้ยงแห่งแรกของโลก</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1.5–2 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298195-d324880-Reviews-Mikimoto_Pearl_Island-Toba_Mie_Prefecture_Tokai_Chubu.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">หินคู่ เมียวโตะ อิวะ (Meoto Iwa)</div>
-          <div class="card-reason">หินสามีภรรยาผูกเชือกศักดิ์สิทธิ์ริมทะเล ชมพระอาทิตย์ขึ้นสวยมาก</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1–1.5 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298196-d317832-Reviews-Meoto_Iwa-Ise_Mie_Prefecture_Tokai_Chubu.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">ตลาดเช้า Toba / Ise</div>
-          <div class="card-reason">อาหารทะเลสดริมทะเล บรรยากาศชาวประมงท้องถิ่น</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1 ชม.</div>
-            <a class="review-link" href="https://www.google.com/search?q=Toba+morning+market+Mie+review" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SHIGA -->
-    <div class="province-block">
-      <div class="province-header">
-        <div class="province-dot" style="background:#1e7a8a"></div>
-        <div class="province-name">🏔️ ทะเลสาบบิวะ / ชิกะ (Lake Biwa / Shiga)</div>
-        <div class="province-count">5 แห่ง</div>
-      </div>
-      <div class="cards-grid">
-        <div class="card">
-          <div class="card-name">ปราสาทฮิโกเนะ (Hikone Castle)</div>
-          <div class="card-reason">ปราสาทระดับ National Treasure อายุ 400 ปี ยังคงสภาพดีมาก</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 2–2.5 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298204-d317930-Reviews-Hikone_Castle-Hikone_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">ย่านเมืองเก่าฮิโกเนะ (Yume Kyobashi Castle Road)</div>
-          <div class="card-reason">ถนนหินเก่าแก่ ร้านขนม ร้านของที่ระลึกน่ารัก</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298204-d1565218-Reviews-Yume_Kyobashi_Castle_Road-Hikone_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">นาการาฮามะ (Nagahama)</div>
-          <div class="card-reason">เมืองริมทะเลสาบ มีร้านแก้วคราฟต์ชื่อดัง (Kurokabe)</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1.5–2 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g1022745-d1199714-Reviews-Kurokabe_Square-Nagahama_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">ล่องเรือทะเลสาบบิวะ (Biwako Cruise)</div>
-          <div class="card-reason">ทะเลสาบใหญ่ที่สุดในญี่ปุ่น วิวภูเขาโอบล้อมรอบด้าน</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1.5 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298200-d1455774-Reviews-Lake_Biwa-Otsu_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-name">วัดอิชิยามะเดระ (Ishiyamadera)</div>
-          <div class="card-reason">วัดริมทะเลสาบ ดอก Wisteria บานสวยช่วงพฤษภา 🌸</div>
-          <div class="card-footer">
-            <div class="card-time">⏱ 1–1.5 ชม.</div>
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298200-d1455851-Reviews-Ishiyamadera_Temple-Otsu_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-      </div>
+    <div class="tips">
+      <div class="tips-title">Local Tips</div>
+      <div class="tip-item"><div class="tip-num">i.</div><div><strong>โทรจองล่วงหน้า</strong> วันเสาร์ของ Golden Week ร้านคนเยอะ — โดยเฉพาะ Maguro Zanmai Nachi (Kumano Beef จำนวนจำกัด)</div></div>
+      <div class="tip-item"><div class="tip-num">ii.</div><div><strong>Wakayama Ramen ไม่อยู่ในเขตนี้</strong> — เก็บไว้กินที่โอซาก้าวันที่ 4 (มี Ide Shoten สาขา)</div></div>
+      <div class="tip-item"><div class="tip-num">iii.</div><div><strong>ของฝากจาก Toretore</strong> — Umeboshi, Kishu Bingo Salt, Manatsu Mikan Juice, Maguro Senbei</div></div>
     </div>
   </div>
 
-  <!-- TAB: MUSEUMS -->
-  <div class="tab-panel" id="tab-museums">
-
-    <div class="tip-banner">
-      <div class="season-icon">🎟️</div>
-      <div class="tip-text">
-        <strong>Kansai Grutto Pass (1,400 เยน)</strong> — ให้สิทธิ์เข้าฟรีหรือลดราคากว่า 50 พิพิธภัณฑ์ในคันไซ ใช้ได้ 3 เดือน ถ้าแพลนเที่ยวพิพิธภัณฑ์หลายแห่งในโอซาก้า-เกียวโต คุ้มมาก
-      </div>
+  <!-- ============= DAY 2 ============= -->
+  <div class="day-content" id="day-2">
+    <div class="day-header">
+      <div class="day-label">Sunday · 03 May 2026</div>
+      <h2 class="day-title">Toba & Ise · Pearls and Tuna</h2>
+      <p class="day-route">Hotel Nami → Toba Aquarium → Pearl Museum → Okage Yokocho → Yokoyama View → Shima</p>
     </div>
 
-    <!-- OSAKA MUSEUMS -->
-    <div class="province-block">
-      <div class="province-header">
-        <div class="province-dot" style="background:#c84b11"></div>
-        <div class="province-name">🏯 โอซาก้า (Osaka)</div>
-        <div class="province-count">7 แห่ง</div>
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">i.</div>
+        <div>
+          <div class="section-title">Trip Itinerary</div>
+          <div class="section-subtitle">เส้นทางและกิจกรรม</div>
+        </div>
       </div>
-      <div class="cards-grid">
-        <div class="museum-card">
-          <div class="museum-name">Osaka Museum of History</div>
-          <div class="museum-about">ประวัติศาสตร์โอซาก้า 1,350 ปี มีการจำลองพระราชวัง Naniwa ในศตวรรษที่ 7 จำลองย่านเมืองเก่า และโรงละคร Kabuki ขนาดเท่าของจริง</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d592812-Reviews-Osaka_Museum_of_History-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
+      <div class="timeline">
+        <div class="timeline-row">
+          <div class="timeline-time">08:00</div>
+          <div class="timeline-activity"><strong>Hotel Nami → Toba Aquarium</strong><div class="timeline-note">ขับ ~1.5 ชม. ผ่านภูเขา</div></div>
         </div>
-        <div class="museum-card">
-          <div class="museum-name">Osaka Museum of Housing and Living</div>
-          <div class="museum-about">จำลองถนนและบ้านเรือนสมัยเอโดะและเมจิ ให้เดินเข้าไปสัมผัสบรรยากาศชีวิตคนโอซาก้าโบราณ</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d592811-Reviews-Osaka_Museum_of_Housing_and_Living-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
+        <div class="timeline-row">
+          <div class="timeline-time">09:40</div>
+          <div class="timeline-activity"><strong>Toba Aquarium</strong> — พิพิธภัณฑ์สัตว์น้ำใหญ่ที่สุดของญี่ปุ่น</div>
         </div>
-        <div class="museum-card">
-          <div class="museum-name">National Museum of Art Osaka (NMAO)</div>
-          <div class="museum-about">ศิลปะญี่ปุ่นและนานาชาติหลังสงครามโลกครั้งที่ 2 รวมถึงงานของ Chiharu Shiota และ Christian Boltanski อยู่ใต้ดินบนเกาะ Nakanoshima</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d592810-Reviews-National_Museum_of_Art_Osaka-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
+        <div class="timeline-row">
+          <div class="timeline-time">13:00</div>
+          <div class="timeline-activity"><strong>Pearl Museum (Mikimoto)</strong> ⭐<div class="timeline-note">โชว์ Ama ดำน้ำเก็บมุก</div></div>
         </div>
-        <div class="museum-card">
-          <div class="museum-name">Nakanoshima Fine Arts Museum (NAKKA)</div>
-          <div class="museum-about">ศิลปะสมัยใหม่และร่วมสมัยที่เกี่ยวข้องกับโอซาก้าและคันไซ รวมกว่า 6,000 ชิ้น มีงานของ Dalí, Magritte, และ Basquiat</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d23518948-Reviews-Nakanoshima_Museum_of_Art_Osaka-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
+        <div class="timeline-row">
+          <div class="timeline-time">14:00</div>
+          <div class="timeline-activity"><strong>ถนนโบราณโอคาเงะ</strong> ⭐⭐<div class="timeline-note">สวรรค์ของกินเล่น!</div></div>
         </div>
-        <div class="museum-card">
-          <div class="museum-name">Museum of Oriental Ceramics</div>
-          <div class="museum-about">เซรามิกและเครื่องปั้นดินเผาญี่ปุ่นและเอเชีย โดดเด่นเรื่องเครื่องเคลือบเกาหลีและจีนหายาก</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d317754-Reviews-Museum_of_Oriental_Ceramics_Osaka-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
+        <div class="timeline-row">
+          <div class="timeline-time">16:00</div>
+          <div class="timeline-activity"><strong>Yokoyama View Point</strong><div class="timeline-note">วิวทะเล Ago Bay ทันแสงทอง</div></div>
         </div>
-        <div class="museum-card">
-          <div class="museum-name">Osaka Science Museum</div>
-          <div class="museum-about">วิทยาศาสตร์เชิงโต้ตอบ เรื่องจักรวาล เคมี ไฟฟ้า และพลังงาน มีท้องฟ้าจำลองด้วย เหมาะสำหรับทุกวัย</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d592807-Reviews-Osaka_Science_Museum-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="museum-card">
-          <div class="museum-name">CupNoodles Museum Osaka</div>
-          <div class="museum-about">ประวัติและวัฒนธรรมของบะหมี่กึ่งสำเร็จรูป ทำ Cup Noodles สูตรของตัวเองได้ที่นี่ สนุกมาก</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298566-d7076540-Reviews-Cup_Noodles_Museum_Osaka_Ikeda-Osaka_Osaka_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
+        <div class="timeline-row">
+          <div class="timeline-time">17:30</div>
+          <div class="timeline-activity"><strong>เช็คอินที่พัก Shima</strong></div>
         </div>
       </div>
     </div>
 
-    <!-- KYOTO MUSEUMS -->
-    <div class="province-block">
-      <div class="province-header">
-        <div class="province-dot" style="background:#6b3fa0"></div>
-        <div class="province-name">⛩️ เกียวโต (Kyoto)</div>
-        <div class="province-count">5 แห่ง</div>
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">ii.</div>
+        <div>
+          <div class="section-title">Food Guide</div>
+          <div class="section-subtitle">ของกินวันนี้</div>
+        </div>
       </div>
-      <div class="cards-grid">
-        <div class="museum-card">
-          <div class="museum-name">Kyoto National Museum</div>
-          <div class="museum-about">ประวัติศาสตร์ญี่ปุ่นผ่านงานศิลปะและหัตถกรรม รวมสมบัติแห่งชาติหลายชิ้น ตั้งอยู่ใกล้วัดคิโยมิซุ</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d317761-Reviews-Kyoto_National_Museum-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
+
+      <!-- Breakfast -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Morning</div>
+          <div class="meal-title">มื้อเช้า · ก่อนออกเดินทาง</div>
         </div>
-        <div class="museum-card">
-          <div class="museum-name">Kyoto Municipal Museum of Art</div>
-          <div class="museum-about">งานศิลปะของศิลปินเกียวโตยุคใหม่และร่วมสมัย มีราว 3,300 ชิ้น และจัดนิทรรศการ Nitten ที่ใหญ่ที่สุดในญี่ปุ่น</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d317763-Reviews-Kyoto_City_KYOCERA_Museum_of_Art-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Hotel Nami Breakfast</div></td>
+              <td data-label="ของควรลอง" class="menu-list">ถ้ารวมในที่พัก — กินที่โรงแรม</td>
+              <td data-label="ราคา" class="price-tag">รวม</td>
+              <td data-label="Location" class="location-tag">Hotel Nami</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Lawson Kii-Katsuura</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Onigiri</span>, ซาลาเปา, กาแฟ — กินบนรถ</td>
+              <td data-label="ราคา" class="price-tag">600 ¥</td>
+              <td data-label="Location" class="location-tag">หน้า Kii-Katsuura Station · 24 ชม.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Lunch -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Lunch</div>
+          <div class="meal-title">มื้อเที่ยง · ที่ Toba</div>
         </div>
-        <div class="museum-card">
-          <div class="museum-name">Miho Museum</div>
-          <div class="museum-about">ออกแบบโดย I.M. Pei ตั้งกลางภูเขา แสดงงานศิลปะญี่ปุ่นคู่กับโบราณวัตถุจากอียิปต์ กรีก และอารยธรรมโบราณอื่นๆ</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g1022741-d317932-Reviews-Miho_Museum-Koka_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
+        <div class="meal-context">⭐ บ้านของกุ้งมังกรอิเสะ + หอยนางรม Toba</div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Tachibana <span class="star">★</span></div><div class="rest-jp">橘</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Iseebi Sashimi</span>, Awabi Steak, <span class="highlight">Tekone-zushi</span></td>
+              <td data-label="ราคา" class="price-tag">3,500-6,000 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ Toba Station · 11:00-14:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Toba Ichiban Gai</div><div class="rest-jp">鳥羽一番街</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">หอยนางรมย่าง</span>, Iseebi Misoshiru, Maru-yaki</td>
+              <td data-label="ราคา" class="price-tag">1,500-2,500 ¥</td>
+              <td data-label="Location" class="location-tag">ติด Toba Station · 9:30-17:30</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Asari</div><div class="rest-jp">あさり</div></td>
+              <td data-label="ของควรลอง" class="menu-list">เซ็ตข้าวกล่อง, Tekone-zushi</td>
+              <td data-label="ราคา" class="price-tag">1,200-2,000 ¥</td>
+              <td data-label="Location" class="location-tag">ในตัว Toba Aquarium</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Snack at Okage -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Afternoon Treats</div>
+          <div class="meal-title">ของกินเล่น · ถนนโอคาเงะ</div>
         </div>
-        <div class="museum-card">
-          <div class="museum-name">Kyoto International Manga Museum</div>
-          <div class="museum-about">งานการ์ตูนมังงะญี่ปุ่นกว่า 300,000 เล่ม ประวัติและวัฒนธรรมมังงะ สามารถอ่านได้บนพื้นหญ้าด้านนอก</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d1388826-Reviews-Kyoto_International_Manga_Museum-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
+        <div class="meal-context">สวรรค์ของกินเล่น! ไม่ต้องกินเยอะ ค่อยๆ ชิมไปเรื่อยๆ</div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Akafuku Honten <span class="star">★</span></div><div class="rest-jp">赤福本店</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Akafuku Mochi</span> (ตำนาน 300 ปี!), Bon Bon Akafuku Set</td>
+              <td data-label="ราคา" class="price-tag">220-290 ¥</td>
+              <td data-label="Location" class="location-tag">ถนนโอคาเงะ main store · 5:00-17:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Sumiyoshiya</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Iseji Soft Cream</span> (รสมิริน) — รสไม่เหมือนที่อื่น</td>
+              <td data-label="ราคา" class="price-tag">400-500 ¥</td>
+              <td data-label="Location" class="location-tag">ถนนโอคาเงะ</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Daiki</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Iseebi Korokke</span> (ครีมโครเก็ตกุ้งมังกร!)</td>
+              <td data-label="ราคา" class="price-tag">350 ¥</td>
+              <td data-label="Location" class="location-tag">ถนนโอคาเงะ</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Goro Dango</div><div class="rest-jp">五郎だんご</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Mitarashi Dango ย่างซีอิ๊วหวาน — ย่างสดที่หน้าร้าน</td>
+              <td data-label="ราคา" class="price-tag">200 ¥</td>
+              <td data-label="Location" class="location-tag">ถนนโอคาเงะ</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Sushi Kyu</div><div class="rest-jp">すし久</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Tekone-zushi</span> ตำนาน — ข้าวหน้าทูน่าหมัก</td>
+              <td data-label="ราคา" class="price-tag">1,500-2,000 ¥</td>
+              <td data-label="Location" class="location-tag">ถนนโอคาเงะ</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Iseno Kuni Beer</div></td>
+              <td data-label="ของควรลอง" class="menu-list">เบียร์คราฟต์ Mie (Pale Ale, Yuzu, Ginger)</td>
+              <td data-label="ราคา" class="price-tag">700 ¥</td>
+              <td data-label="Location" class="location-tag">ถนนโอคาเงะ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Dinner -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Evening</div>
+          <div class="meal-title">มื้อเย็น · ที่ Shima</div>
         </div>
-        <div class="museum-card">
-          <div class="museum-name">Nishiki Textile Museum (Nishijin)</div>
-          <div class="museum-about">ผ้าทอและสิ่งทอแบบดั้งเดิมของเกียวโต ลวดลาย Nishijin ที่มีชื่อเสียง มีสาธิตการทอผ้าและชุดกิโมโนให้ชม</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298564-d317774-Reviews-Nishijin_Textile_Center-Kyoto_Kyoto_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
+        <div class="meal-context">เช็คก่อน — ที่พักอาจมี Kaiseki Dinner รวม (กุ้งมังกร + หอยเป๋าฮื้อ!)</div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Ryokan Kaiseki <span class="star">★</span></div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Iseebi + Awabi Course</span> — กุ้งมังกร + หอยเป๋าฮื้อ Kaiseki</td>
+              <td data-label="ราคา" class="price-tag">8,000-15,000 ¥</td>
+              <td data-label="Location" class="location-tag">ในที่พัก (ถ้ามี Plan)</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Hachiman Kamado <span class="star">★</span></div><div class="rest-jp">はちまんかまど</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Ama Hut Experience</span> — กินกับคุณยายชาวประมงในกระท่อม!</td>
+              <td data-label="ราคา" class="price-tag">4,000-5,000 ¥</td>
+              <td data-label="Location" class="location-tag">Shima · ⚠️ จองล่วงหน้า 7 วัน</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Mitsuhama</div><div class="rest-jp">みつ浜</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Iseebi Course</span>, Ama Ryori (อาหารชาวประมงดำน้ำ)</td>
+              <td data-label="ราคา" class="price-tag">3,500-5,000 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ Kashikojima Station · 17:00-21:00</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
-    <!-- NARA MUSEUMS -->
-    <div class="province-block">
-      <div class="province-header">
-        <div class="province-dot" style="background:#2d7a4f"></div>
-        <div class="province-name">🦌 นารา (Nara)</div>
-        <div class="province-count">3 แห่ง</div>
-      </div>
-      <div class="cards-grid">
-        <div class="museum-card">
-          <div class="museum-name">Nara National Museum</div>
-          <div class="museum-about">ศิลปะพุทธศาสนาญี่ปุ่น ได้แก่ พระพุทธรูป ภาพวาด ม้วนคัมภีร์ และเครื่องใช้ในพิธีกรรม เก่าแก่ตั้งแต่ปี 1889</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298198-d317759-Reviews-Nara_National_Museum-Nara_Nara_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="museum-card">
-          <div class="museum-name">Kofuku-ji National Treasure Museum</div>
-          <div class="museum-about">สมบัติแห่งชาติด้านพุทธศิลป์ รวมถึงรูปปั้น Ashura อายุ 1,300 ปี สามหน้าหกแขน ที่โด่งดังที่สุดในญี่ปุ่น</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298198-d8649820-Reviews-Kofukuji_National_Treasure_Museum-Nara_Nara_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="museum-card">
-          <div class="museum-name">Nara Prefectural Museum of Art</div>
-          <div class="museum-about">งานศิลปะสมัยใหม่ของญี่ปุ่น โดยเฉพาะจิตรกรรมสไตล์ Nihonga รวมถึงนิทรรศการหมุนเวียนตลอดปี</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.google.com/search?q=Nara+Prefectural+Museum+of+Art+review" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-      </div>
+    <div class="summary">
+      <div class="summary-label">Daily Cost Summary</div>
+      <div class="summary-title">สรุปงบประมาณวันที่ 3 พ.ค.</div>
+      <table class="summary-table">
+        <tr><td class="label-col">เช้า</td><td class="meal-col">Lawson + กินบนรถ</td><td class="price-col">600 ¥</td></tr>
+        <tr><td class="label-col">เที่ยง</td><td class="meal-col">Tachibana / Toba Ichiban Gai</td><td class="price-col">3,500-5,000 ¥</td></tr>
+        <tr><td class="label-col">ของว่าง</td><td class="meal-col">Akafuku + ของกินเล่นโอคาเงะ</td><td class="price-col">1,500-2,000 ¥</td></tr>
+        <tr><td class="label-col">เย็น</td><td class="meal-col">Kaiseki / Hachiman Kamado</td><td class="price-col">รวม / 4,500 ¥</td></tr>
+        <tr><td class="label-col"><strong>รวม/คน</strong></td><td class="meal-col"></td><td class="price-col">~5,600-12,100 ¥</td></tr>
+      </table>
     </div>
 
-    <!-- WAKAYAMA MUSEUMS -->
-    <div class="province-block">
-      <div class="province-header">
-        <div class="province-dot" style="background:#1a6fa8"></div>
-        <div class="province-name">🌊 วากายามะ (Wakayama)</div>
-        <div class="province-count">3 แห่ง</div>
-      </div>
-      <div class="cards-grid">
-        <div class="museum-card">
-          <div class="museum-name">Wakayama Prefectural Museum</div>
-          <div class="museum-about">ประวัติศาสตร์และโบราณวัตถุของวากายามะ วัฒนธรรมท้องถิ่น มีป้ายภาษาอังกฤษด้วย ค่าเข้าชมไม่แพง</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.google.com/search?q=Wakayama+Prefectural+Museum+review" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="museum-card">
-          <div class="museum-name">Wakayama Museum of Modern Art</div>
-          <div class="museum-about">ศิลปะสมัยใหม่ของญี่ปุ่น มีงานศิลปินนานาชาติชิ้นสำคัญในคอลเลคชันถาวร ตั้งอยู่ตรงข้ามปราสาทวากายามะ</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.google.com/search?q=Wakayama+Museum+of+Modern+Art+review+tripadvisor" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="museum-card">
-          <div class="museum-name">Koyasan Reihōkan (霊寶館)</div>
-          <div class="museum-about">สมบัติทางพุทธศิลป์ของโคยาซัน อายุกว่า 1,000 ปี รูปปั้น จิตรกรรม และของใช้ในพิธีกรรมชินงอน</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g1121285-d1890889-Reviews-Reihokan_Museum-Koya_cho_Ito_gun_Wakayama_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- HIMEJI MUSEUMS -->
-    <div class="province-block">
-      <div class="province-header">
-        <div class="province-dot" style="background:#8a6b0a"></div>
-        <div class="province-name">🍢 ฮิเมจิ (Hyogo / Himeji)</div>
-        <div class="province-count">3 แห่ง</div>
-      </div>
-      <div class="cards-grid">
-        <div class="museum-card">
-          <div class="museum-name">Himeji City Museum of History</div>
-          <div class="museum-about">ประวัติศาสตร์เมืองฮิเมจิ เกราะซามูไร และโบราณวัตถุที่เกี่ยวข้องกับปราสาทฮิเมจิ ตั้งอยู่ใกล้ปราสาทมาก</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.google.com/search?q=Himeji+City+Museum+of+History+review" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="museum-card">
-          <div class="museum-name">Hyogo Prefectural Museum of Art</div>
-          <div class="museum-about">ศิลปะสมัยใหม่และร่วมสมัยระดับใหญ่ที่สุดในคันไซ มีงาน Rodin หลายชิ้น ตั้งริมทะเลในโกเบ</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298551-d3565196-Reviews-Hyogo_Prefectural_Museum_of_Art-Kobe_Hyogo_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="museum-card">
-          <div class="museum-name">Himeji City Museum of Art</div>
-          <div class="museum-about">งานศิลปะตะวันตกและญี่ปุ่น ตั้งอยู่ในอาคาร Meiji สวยงาม ราคาถูก เหมาะไปต่อหลังเที่ยวปราสาท</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.google.com/search?q=Himeji+City+Museum+of+Art+review" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- MIE MUSEUMS -->
-    <div class="province-block">
-      <div class="province-header">
-        <div class="province-dot" style="background:#a83228"></div>
-        <div class="province-name">🌅 มิเอะ (Mie)</div>
-        <div class="province-count">4 แห่ง</div>
-      </div>
-      <div class="cards-grid">
-        <div class="museum-card">
-          <div class="museum-name">Mikimoto Pearl Museum</div>
-          <div class="museum-about">ทุกอย่างเกี่ยวกับไข่มุก แบ่งเป็นสองส่วน: เครื่องประดับไข่มุก และงานศิลปะที่ทำจากไข่มุก มีสาธิตการดำน้ำแบบ Ama ทุกชั่วโมง</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298195-d324880-Reviews-Mikimoto_Pearl_Island-Toba_Mie_Prefecture_Tokai_Chubu.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="museum-card">
-          <div class="museum-name">Kokichi Mikimoto Memorial Hall</div>
-          <div class="museum-about">ชีวประวัติของ Mikimoto Kōkichi "ราชาไข่มุก" วีดิโอและนิทรรศการเกี่ยวกับยุคเมจิและการก่อตั้งอุตสาหกรรมไข่มุก</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298195-d324880-Reviews-Mikimoto_Pearl_Island-Toba_Mie_Prefecture_Tokai_Chubu.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="museum-card">
-          <div class="museum-name">Toba Sea-Folk Museum</div>
-          <div class="museum-about">วิถีชีวิตชาวประมงและนักดำน้ำ Ama ของมิเอะ เรือประมงโบราณและเครื่องมือดำน้ำ มีเรือโบราณกว่า 500 ลำ</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.google.com/search?q=Toba+Sea+Folk+Museum+review" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="museum-card">
-          <div class="museum-name">Ise City Museum</div>
-          <div class="museum-about">ประวัติศาสตร์เมืองอิเสะ ความสัมพันธ์ระหว่างชุมชนกับศาลเจ้าอิเสะตลอด 2,000 ปี</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.google.com/search?q=Ise+City+Museum+review" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SHIGA MUSEUMS -->
-    <div class="province-block">
-      <div class="province-header">
-        <div class="province-dot" style="background:#1e7a8a"></div>
-        <div class="province-name">🏔️ ทะเลสาบบิวะ / ชิกะ (Lake Biwa / Shiga)</div>
-        <div class="province-count">4 แห่ง</div>
-      </div>
-      <div class="cards-grid">
-        <div class="museum-card">
-          <div class="museum-name">Lake Biwa Museum</div>
-          <div class="museum-about">ประวัติศาสตร์ 4 ล้านปีของทะเลสาบบิวะ สิ่งมีชีวิตเฉพาะถิ่น มีพิพิธภัณฑ์สัตว์น้ำจืดที่ใหญ่ที่สุดในญี่ปุ่น รวมแมวน้ำจากทะเลสาบไบคาล</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g1121718-d317933-Reviews-Lake_Biwa_Museum-Kusatsu_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="museum-card">
-          <div class="museum-name">Sagawa Art Museum</div>
-          <div class="museum-about">ผลงานสามศิลปินระดับตำนานญี่ปุ่น: จิตรกร Ikuo Hirayama, ประติมากร Churyo Sato, และช่างปั้น Kichizaemon Raku ริมทะเลสาบบิวะ</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g1022741-d8560059-Reviews-Sagawa_Art_Museum-Koka_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="museum-card">
-          <div class="museum-name">Miho Museum (ชิกะตอนใต้)</div>
-          <div class="museum-about">ตั้งกลางภูเขา ออกแบบโดย I.M. Pei แสดงโบราณวัตถุจากหลายอารยธรรมโลกควบคู่งานศิลปะญี่ปุ่น เส้นทางเข้าถึงพิเศษมาก</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g1022741-d317932-Reviews-Miho_Museum-Koka_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-        <div class="museum-card">
-          <div class="museum-name">Hikone Castle Museum</div>
-          <div class="museum-about">เกราะและอาวุธซามูไร สมบัติของตระกูล Ii ที่ครองปราสาทฮิโกเนะ ภาพวาด ชุดเกราะ และของใช้ในราชสำนัก</div>
-          <div class="museum-footer">
-            <a class="review-link" href="https://www.tripadvisor.com/Attraction_Review-g298204-d317930-Reviews-Hikone_Castle-Hikone_Shiga_Prefecture_Kinki.html" target="_blank">รีวิว ↗</a>
-          </div>
-        </div>
-      </div>
+    <div class="tips">
+      <div class="tips-title">Local Tips</div>
+      <div class="tip-item"><div class="tip-num">i.</div><div><strong>Iseebi (กุ้งมังกร) ฤดูกาลใกล้จบ</strong> — ตุลาคม-พฤษภาคม คุณไปปลายฤดูพอดี!</div></div>
+      <div class="tip-item"><div class="tip-num">ii.</div><div><strong>Akafuku เก็บได้แค่ 2 วัน</strong> — ถ้าซื้อกลับไทยต้องซื้อวันสุดท้ายเท่านั้น</div></div>
+      <div class="tip-item"><div class="tip-num">iii.</div><div><strong>Hachiman Kamado ต้องจองล่วงหน้า 7 วัน</strong> — เป็น Ama Hut หาที่อื่นไม่ได้!</div></div>
     </div>
   </div>
+
+  <!-- ============= DAY 3 ============= -->
+  <div class="day-content" id="day-3">
+    <div class="day-header">
+      <div class="day-label">Monday · 04 May 2026</div>
+      <h2 class="day-title">Nara · Sacred Deer & Ancient Sushi</h2>
+      <p class="day-route">Shima → Iseji Bridge → Nara Park → Todaiji → Kasuga Taisha → คืนรถ Toyota → Shin-Osaka</p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">i.</div>
+        <div>
+          <div class="section-title">Trip Itinerary</div>
+          <div class="section-subtitle">เส้นทางและกิจกรรม</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-row">
+          <div class="timeline-time">08:00</div>
+          <div class="timeline-activity"><strong>Shima → สะพาน Iseji + ศาลเจ้า</strong><div class="timeline-note">เริ่มออกเดินทาง</div></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">10:40</div>
+          <div class="timeline-activity"><strong>เข้าสู่ Nara</strong> — Lot A3 (ที่จอดรถ)</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">11:00</div>
+          <div class="timeline-activity"><strong>Nara Park</strong> ⭐ — ให้อาหารกวาง 1,000+ ตัว!</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">12:00</div>
+          <div class="timeline-activity"><strong>Todaiji Temple</strong> ⭐⭐<div class="timeline-note">พระพุทธรูปองค์ใหญ่ที่สุดในญี่ปุ่น</div></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">14:00</div>
+          <div class="timeline-activity"><strong>Kasuga Taisha Shrine</strong><div class="timeline-note">โคมหิน 3,000 ใบในป่าศักดิ์สิทธิ์</div></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">15:30</div>
+          <div class="timeline-activity"><strong>Kasuga Manyo Botanical Garden</strong></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">17:00</div>
+          <div class="timeline-activity"><strong>ออกจาก Nara → คืนรถ Toyota</strong></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">18:30</div>
+          <div class="timeline-activity"><strong>เช็คอิน Shin-Osaka Hotel (Sunny Side)</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">ii.</div>
+        <div>
+          <div class="section-title">Food Guide</div>
+          <div class="section-subtitle">ของกินวันนี้</div>
+        </div>
+      </div>
+
+      <!-- Breakfast -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Morning</div>
+          <div class="meal-title">มื้อเช้า · ที่พัก Shima</div>
+        </div>
+        <div class="meal-context">ส่วนใหญ่ Ryokan มี Breakfast Plan รวม — กินให้อิ่มก่อนออก เพราะระหว่างทาง 3 ชม.ไม่มีร้านเด่น</div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Ryokan Breakfast</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Japanese set: ปลาย่าง, miso, ไข่ดาว, ผักดอง</td>
+              <td data-label="ราคา" class="price-tag">รวม</td>
+              <td data-label="Location" class="location-tag">ในที่พัก</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Lawson Kashikojima</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Onigiri, ซาลาเปา, กาแฟ — ถ้าไม่มี Plan</td>
+              <td data-label="ราคา" class="price-tag">600 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ Kashikojima Station</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Lunch -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Lunch</div>
+          <div class="meal-title">มื้อเที่ยง · ที่ Nara</div>
+        </div>
+        <div class="meal-context">⭐ Nara มีอาหารท้องถิ่นเฉพาะที่หาที่อื่นไม่ได้! Kakinoha-zushi ตำนาน 1,300 ปี</div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Hiraso <span class="star">★</span></div><div class="rest-jp">平宗</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Kakinoha-zushi Set</span> (ซูชิห่อใบลูกพลับ ตำนาน 150 ปี!), Cha-gayu, Yamato Beef</td>
+              <td data-label="ราคา" class="price-tag">1,800-3,500 ¥</td>
+              <td data-label="Location" class="location-tag">Naramachi · 11:00-15:30</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Mizuya Chaya <span class="star">★</span></div><div class="rest-jp">水谷茶屋</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Warabi-mochi</span>, Soba เย็น, Amazake — กินกับกวาง! 🦌</td>
+              <td data-label="ราคา" class="price-tag">800-1,500 ¥</td>
+              <td data-label="Location" class="location-tag">ในป่า Kasuga Taisha · 10:00-16:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Yoshikawa-tei</div><div class="rest-jp">吉川亭</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Yamato Beef Steak</span> (Wagyu ของ Nara)</td>
+              <td data-label="ราคา" class="price-tag">4,000-7,000 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ Kintetsu Nara · 11:30-14:30</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Harishin</div><div class="rest-jp">はり新</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Kaki-no-Bento</span> (เบนโตะลูกพลับ Kaiseki)</td>
+              <td data-label="ราคา" class="price-tag">3,500-5,000 ¥</td>
+              <td data-label="Location" class="location-tag">Naramachi (บ้านไม้โบราณ)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Snack -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Afternoon Snack</div>
+          <div class="meal-title">ของกินเล่น · ในเมือง Nara</div>
+        </div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Nakatanidou <span class="star">★</span></div><div class="rest-jp">中谷堂</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Yomogi Mochi</span> + ดูโชว์ตำโมจิเร็วที่สุดในญี่ปุ่น!</td>
+              <td data-label="ราคา" class="price-tag">200 ¥/ชิ้น</td>
+              <td data-label="Location" class="location-tag">ถนน Higashi-Muki (จาก Kintetsu Nara) · 10:00-19:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">ของฝาก Nara</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Nara Pickles (ขี้สาเก), Sanshoku Dango, Wagashi โบราณ</td>
+              <td data-label="ราคา" class="price-tag">500-1,500 ¥</td>
+              <td data-label="Location" class="location-tag">ย่าน Sanjo & Naramachi</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="warning"><strong>ห้ามให้กวางกินขนมอื่น!</strong> ใช้แค่ Shika Senbei (200 ¥) ที่ขายในสวนเท่านั้น — กวางท้องเสียและคุณโดนปรับ</div>
+      </div>
+
+      <!-- Dinner -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Evening</div>
+          <div class="meal-title">มื้อเย็น · ที่โอซาก้า (Shin-Osaka / Umeda)</div>
+        </div>
+        <div class="meal-context">หลังคืนรถ + เช็คอินแล้ว — เก็บ Wakayama Ramen ที่สัญญาไว้!</div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Ide Shoten <span class="star">★</span></div><div class="rest-jp">井出商店</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Wakayama Ramen</span> (ตำนาน!) + Hayazushi (ซูชิแบบ Wakayama)</td>
+              <td data-label="ราคา" class="price-tag">950-1,500 ¥</td>
+              <td data-label="Location" class="location-tag">Hankyu Sanbangai B2 (Umeda) · 11:00-22:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Menya Joroku</div><div class="rest-jp">麺屋 ジョロキア</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Spicy Tantanmen</span> — เผ็ดร้อนถึงใจ</td>
+              <td data-label="ราคา" class="price-tag">1,000-1,500 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ Shin-Osaka East Exit · 11:00-23:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Kushikatsu Daruma</div><div class="rest-jp">串カツだるま</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Kushikatsu</span> 10 ชนิด (Beef, Asparagus, Cheese, Mochi)</td>
+              <td data-label="ราคา" class="price-tag">2,000-3,000 ¥</td>
+              <td data-label="Location" class="location-tag">ในตัวสถานี Shin-Osaka · 11:00-23:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Yodobashi Restaurant Floor</div></td>
+              <td data-label="ของควรลอง" class="menu-list">หลายร้านในชั้นเดียว: ราเมง, ซูชิ, ทงคัตสึ, อิตาเลียน</td>
+              <td data-label="ราคา" class="price-tag">1,500-3,000 ¥</td>
+              <td data-label="Location" class="location-tag">Yodobashi Umeda ชั้น 8 · ถึง 23:00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="summary-label">Daily Cost Summary</div>
+      <div class="summary-title">สรุปงบประมาณวันที่ 4 พ.ค.</div>
+      <table class="summary-table">
+        <tr><td class="label-col">เช้า</td><td class="meal-col">Ryokan Breakfast</td><td class="price-col">รวม / 600 ¥</td></tr>
+        <tr><td class="label-col">เที่ยง</td><td class="meal-col">Hiraso (Kakinoha-zushi)</td><td class="price-col">2,000-3,000 ¥</td></tr>
+        <tr><td class="label-col">ของว่าง</td><td class="meal-col">Nakatanidou + ดูโชว์ตำโมจิ</td><td class="price-col">400-600 ¥</td></tr>
+        <tr><td class="label-col">เย็น</td><td class="meal-col">Ide Shoten Wakayama Ramen</td><td class="price-col">1,200-1,500 ¥</td></tr>
+        <tr><td class="label-col"><strong>รวม/คน</strong></td><td class="meal-col"></td><td class="price-col">~3,600-5,700 ¥</td></tr>
+      </table>
+    </div>
+
+    <div class="tips">
+      <div class="tips-title">Local Tips</div>
+      <div class="tip-item"><div class="tip-num">i.</div><div><strong>Kakinoha-zushi เก็บได้ 2-3 วัน</strong> — ซื้อกล่องของฝากกินมื้อเช้าวันหลังได้ ราคา 1,200-1,800 ¥/กล่อง</div></div>
+      <div class="tip-item"><div class="tip-num">ii.</div><div><strong>กวางที่ Nara เป็น "ทูตของเทพเจ้า"</strong> — ห้ามทำร้าย แต่ระวังกระเป๋า/แผนที่! กวางแย่งกระดาษกินบ่อย</div></div>
+      <div class="tip-item"><div class="tip-num">iii.</div><div><strong>Mizuya Chaya เป็น hidden gem</strong> — ส่วนใหญ่นักท่องเที่ยวเดินผ่าน อยู่ในป่าแบบ peaceful มาก</div></div>
+      <div class="tip-item"><div class="tip-num">iv.</div><div><strong>Wakayama Ramen ที่ Ide Shoten</strong> — สั่ง "ramen + hayazushi 2 ชิ้น" เป็นชุดดั้งเดิมของชาวประมง Wakayama</div></div>
+    </div>
+  </div>
+
+  <!-- ============= DAY 4 ============= -->
+  <div class="day-content" id="day-4">
+    <div class="day-header">
+      <div class="day-label">Tuesday · 05 May 2026</div>
+      <h2 class="day-title">Osaka · Kuidaore</h2>
+      <p class="day-route">Shin-Osaka → ปราสาทโอซาก้า → Maishima Park → Dotonbori → Namba → Shinsekai</p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">i.</div>
+        <div>
+          <div class="section-title">Trip Itinerary</div>
+          <div class="section-subtitle">เส้นทางและกิจกรรม</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-row">
+          <div class="timeline-time">08:00</div>
+          <div class="timeline-activity"><strong>Shin-Osaka → ศาลเจ้านัมบะ ยาซากะ</strong><div class="timeline-note">ศาลเจ้าหัวสิงโตยักษ์ Iconic</div></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">10:00</div>
+          <div class="timeline-activity"><strong>ปราสาทโอซาก้า</strong> ⭐<div class="timeline-note">ขึ้นชั้น 8 ดูวิวเมือง + ใบไม้เขียวสด</div></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">13:00</div>
+          <div class="timeline-activity"><strong>Shubodai</strong> (จุดวิวเมือง)</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">14:00</div>
+          <div class="timeline-activity"><strong>Maishima Seaside Park</strong> ⭐⭐<div class="timeline-note">ทุ่งเนโมฟิลา 5 ล้านดอก ฟ้าเป็นทะเล!</div></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">16:30</div>
+          <div class="timeline-activity"><strong>กลับ Namba / Dotonbori</strong></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">18:00</div>
+          <div class="timeline-activity"><strong>เดินเที่ยว Dotonbori</strong> — ป้ายกูลิโกะติดไฟยามค่ำ</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">21:00</div>
+          <div class="timeline-activity"><strong>กลับ Shin-Osaka</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">ii.</div>
+        <div>
+          <div class="section-title">Food Guide</div>
+          <div class="section-subtitle">โอซาก้า "Kuidaore" — กินจนล้มละลาย!</div>
+        </div>
+      </div>
+
+      <!-- Breakfast -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Morning</div>
+          <div class="meal-title">มื้อเช้า · ที่ Shin-Osaka</div>
+        </div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Marufuku Coffee <span class="star">★</span></div><div class="rest-jp">丸福珈琲店</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Hot Cake Set</span> — แพนเค้กตำนาน 90 ปี + กาแฟดำเข้ม สไตล์ Showa</td>
+              <td data-label="ราคา" class="price-tag">1,200 ¥</td>
+              <td data-label="Location" class="location-tag">Senba Honten · 8:00-23:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Lawson / FamilyMart Premium</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Tamago Sando</span> (แซนวิชไข่ระดับโลก!), Onigiri, Café Latte</td>
+              <td data-label="ราคา" class="price-tag">500-700 ¥</td>
+              <td data-label="Location" class="location-tag">Shin-Osaka Station · 24 ชม.</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">St. Marc Café</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Choco Cro (ครัวซองช์ช็อกโกแลต) + กาแฟ</td>
+              <td data-label="ราคา" class="price-tag">600-800 ¥</td>
+              <td data-label="Location" class="location-tag">ใต้ Shin-Osaka Station</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Lunch -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Lunch</div>
+          <div class="meal-title">มื้อเที่ยง · ใกล้ Maishima / Bentencho</div>
+        </div>
+        <div class="meal-context">หลังปราสาทโอซาก้า ก่อนไป Maishima — เลือก 1 ร้าน</div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Hokkyokusei <span class="star">★</span></div><div class="rest-jp">北極星</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Chicken Omurice</span> ต้นตำรับ! โอซาก้าคิดค้น Omurice — ตำนาน 100 ปี</td>
+              <td data-label="ราคา" class="price-tag">1,100-1,800 ¥</td>
+              <td data-label="Location" class="location-tag">Shinsaibashi Honten · 11:30-22:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Kuromon Ichiba <span class="star">★</span></div><div class="rest-jp">黒門市場</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Otoro Kushiyaki</span>, Kobe Beef Skewer, หอยนางรมย่าง, Uni-don, Strawberry Daifuku</td>
+              <td data-label="ราคา" class="price-tag">2,000-3,500 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ Nipponbashi · 9:00-18:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Wanaka</div><div class="rest-jp">たこ焼き わなか</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Takoyaki 8 ลูก</span> ตำนานโอซาก้า, Yaki-takoyaki (ย่างไฟ)</td>
+              <td data-label="ราคา" class="price-tag">600-1,200 ¥</td>
+              <td data-label="Location" class="location-tag">Sennichimae Honten (Namba) · 10:00-23:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Maishima Park Café</div></td>
+              <td data-label="ของควรลอง" class="menu-list">กาแฟ + เค้ก พร้อมวิวทุ่งเนโมฟิลา 5 ล้านดอก</td>
+              <td data-label="ราคา" class="price-tag">500-1,000 ¥</td>
+              <td data-label="Location" class="location-tag">ใน Maishima Seaside Park</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Snack -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Afternoon Treats</div>
+          <div class="meal-title">ของกินเล่น · Dotonbori</div>
+        </div>
+        <div class="meal-context">เดินเที่ยว Dotonbori — ของกินเล่นข้างถนนเด่นๆ</div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Pablo <span class="star">★</span></div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Mini Cheese Tart</span>, Half-baked Cheesecake</td>
+              <td data-label="ราคา" class="price-tag">800-1,200 ¥</td>
+              <td data-label="Location" class="location-tag">Dotonbori main street</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Rikuro Ojisan <span class="star">★</span></div><div class="rest-jp">りくろーおじさん</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Cheesecake</span> ฟูนุ่มสไตล์ญี่ปุ่น! ตำนานโอซาก้า ต้องลอง!</td>
+              <td data-label="ราคา" class="price-tag">965 ¥/ปอนด์</td>
+              <td data-label="Location" class="location-tag">Namba Honten · 9:00-21:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Beard Papa</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Cream Puff (ที่นี่คือต้นตำรับ! ไส้สดเข้มข้น)</td>
+              <td data-label="ราคา" class="price-tag">200 ¥/ลูก</td>
+              <td data-label="Location" class="location-tag">Dotonbori · 11:00-22:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Tsujiri</div><div class="rest-jp">辻利</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Uji Matcha Soft Cream</span>, Matcha Parfait</td>
+              <td data-label="ราคา" class="price-tag">500-1,000 ¥</td>
+              <td data-label="Location" class="location-tag">Dotonbori</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Glico Pocky Showcase</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Pocky/Pretz รสพิเศษที่ไทยไม่มี — ของฝาก!</td>
+              <td data-label="ราคา" class="price-tag">200-500 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ป้ายกูลิโกะ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Dinner -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Evening</div>
+          <div class="meal-title">มื้อเย็น · Dotonbori / Shinsekai</div>
+        </div>
+        <div class="meal-context">⭐ คืนแรกของโอซาก้าจริงๆ — จัดเต็ม!</div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Mizuno <span class="star">★</span></div><div class="rest-jp">美津の</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Yamaimo-yaki</span> (โอโคโนมิยากิยามะอิโมะตำนาน!), Modan-yaki, Negi-yaki</td>
+              <td data-label="ราคา" class="price-tag">1,800-2,500 ¥</td>
+              <td data-label="Location" class="location-tag">Dotonbori · 11:00-22:00 · ⚠️ ต่อแถว 30-60 นาที</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Kushikatsu Daruma <span class="star">★</span></div><div class="rest-jp">串カツだるま</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Beef Skewer</span>, Asparagus, Cheese, Mochi, ⚠️ ห้ามจิ้มซอส 2 ครั้ง!</td>
+              <td data-label="ราคา" class="price-tag">2,000-3,000 ¥</td>
+              <td data-label="Location" class="location-tag">Shinsekai Honten (Tsutenkaku) · 11:00-22:30</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Kani Doraku</div><div class="rest-jp">かに道楽</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Crab Course Kaiseki</span> — ปูยักษ์ที่ป้ายโด่งดัง!</td>
+              <td data-label="ราคา" class="price-tag">5,000-12,000 ¥</td>
+              <td data-label="Location" class="location-tag">Dotonbori Honten (ป้ายปูยักษ์) · 11:00-23:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Ichiran Ramen</div><div class="rest-jp">一蘭</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Tonkotsu Ramen</span> + Akamaru ซอสเผ็ดพิเศษ — บูธส่วนตัว!</td>
+              <td data-label="ราคา" class="price-tag">1,000-1,500 ¥</td>
+              <td data-label="Location" class="location-tag">Dotonbori Annex · 24 ชม. · วิวคลอง!</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Yakiniku Marukin</div><div class="rest-jp">焼肉マルキン</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">A5 Wagyu Set</span>, Tongue, Hormone — เนื้อย่างปิ้งเอง!</td>
+              <td data-label="ราคา" class="price-tag">4,000-6,500 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ Namba Station · 17:00-23:00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Late Night -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Late Night</div>
+          <div class="meal-title">ของกินดึก / Bar (21:00+)</div>
+        </div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Hozenji Yokocho <span class="star">★</span></div><div class="rest-jp">法善寺横丁</div></td>
+              <td data-label="ของควรลอง" class="menu-list">ตรอกซอยโบราณ! Yakiton-Hosomichi (ไม้เสียบหมูย่าง) + อิซากายะ</td>
+              <td data-label="ราคา" class="price-tag">1,500-2,500 ¥</td>
+              <td data-label="Location" class="location-tag">ติด Dotonbori · จนถึง 24:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Bar Augusta</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Whisky bar คลาสสิก สไตล์ Showa</td>
+              <td data-label="ราคา" class="price-tag">1,200-2,000 ¥/drink</td>
+              <td data-label="Location" class="location-tag">Kita-Shinchi · ถึงตี 2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="summary-label">Daily Cost Summary</div>
+      <div class="summary-title">สรุปงบประมาณวันที่ 5 พ.ค.</div>
+      <table class="summary-table">
+        <tr><td class="label-col">เช้า</td><td class="meal-col">Marufuku Coffee / Lawson</td><td class="price-col">600-1,200 ¥</td></tr>
+        <tr><td class="label-col">เที่ยง</td><td class="meal-col">Kuromon Market / Hokkyokusei</td><td class="price-col">2,000-3,500 ¥</td></tr>
+        <tr><td class="label-col">ของว่าง</td><td class="meal-col">Pablo + Rikuro + Tsujiri (แชร์กัน)</td><td class="price-col">800-1,200 ¥</td></tr>
+        <tr><td class="label-col">เย็น</td><td class="meal-col">Mizuno / Kushikatsu Daruma</td><td class="price-col">2,000-3,000 ¥</td></tr>
+        <tr><td class="label-col"><strong>รวม/คน</strong></td><td class="meal-col"></td><td class="price-col">~5,400-8,900 ¥</td></tr>
+      </table>
+    </div>
+
+    <div class="tips">
+      <div class="tips-title">Local Tips</div>
+      <div class="tip-item"><div class="tip-num">i.</div><div><strong>โอซาก้าคิดค้น Omurice + Okonomiyaki + Kushikatsu + Takoyaki</strong> — 4 อาหารดังของญี่ปุ่นต้นกำเนิดที่นี่!</div></div>
+      <div class="tip-item"><div class="tip-num">ii.</div><div><strong>Kushikatsu Daruma กฎเหล็ก</strong> — ห้ามจิ้มซอส 2 ครั้ง! (ซอสรวม) ใช้กะหล่ำปลีฟรีตักทาแทน</div></div>
+      <div class="tip-item"><div class="tip-num">iii.</div><div><strong>Mizuno ต้องลงชื่อแล้วเดินรอ</strong> — ไปลงชื่อก่อน 17:30 แล้วเดินเที่ยว 1 ชม.กลับมา</div></div>
+      <div class="tip-item"><div class="tip-num">iv.</div><div><strong>Tamago Sando ที่ FamilyMart</strong> — แซนวิชไข่ระดับโลก ดังกว่าที่คุณคิด ลองให้ได้!</div></div>
+      <div class="tip-item"><div class="tip-num">v.</div><div><strong>Rikuro Cheesecake ของฝาก</strong> — เก็บได้ 2 วัน ซื้อกลับโรงแรมได้</div></div>
+    </div>
+  </div>
+
+  <!-- ============= DAY 5 ============= -->
+  <div class="day-content" id="day-5">
+    <div class="day-header">
+      <div class="day-label">Wednesday · 06 May 2026</div>
+      <h2 class="day-title">Arashiyama · Bamboo & Tofu</h2>
+      <p class="day-route">Shin-Osaka → Kyoto → Saga-Arashiyama → ป่าไผ่ → Ninenzaka → Kiyomizu → Smile Hotel</p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">i.</div>
+        <div>
+          <div class="section-title">Trip Itinerary</div>
+          <div class="section-subtitle">เส้นทางและกิจกรรม</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-row">
+          <div class="timeline-time">07:00</div>
+          <div class="timeline-activity"><strong>Shin-Osaka → Kyoto Station</strong><div class="timeline-note">Tokaido-Sanyo Line</div></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">08:15</div>
+          <div class="timeline-activity"><strong>Kyoto → Saga-Arashiyama</strong><div class="timeline-note">San-In Line</div></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">08:30</div>
+          <div class="timeline-activity"><strong>สะพานโทเก็ตสึ + แม่น้ำ</strong></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">09:00</div>
+          <div class="timeline-activity"><strong>สวนคามิยามะ</strong></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">10:30</div>
+          <div class="timeline-activity"><strong>ป่าไผ่อาราชิยามะ</strong> ⭐<div class="timeline-note">Bamboo Grove ที่โด่งดัง</div></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">11:00</div>
+          <div class="timeline-activity"><strong>กลับ Kyoto Station</strong></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">14:00</div>
+          <div class="timeline-activity"><strong>Ninenzaka + วัดคิโยมิซุ</strong> ⭐⭐<div class="timeline-note">UNESCO Heritage</div></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">17:30</div>
+          <div class="timeline-activity"><strong>เช็คอิน Smile Hotel Karasumagojo</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">ii.</div>
+        <div>
+          <div class="section-title">Food Guide</div>
+          <div class="section-subtitle">เกียวโต — เรียบง่ายแต่ลึกซึ้ง</div>
+        </div>
+      </div>
+
+      <!-- Breakfast -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Morning</div>
+          <div class="meal-title">มื้อเช้า · ระหว่างทาง / ที่ Arashiyama</div>
+        </div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Inoda Coffee <span class="star">★</span></div><div class="rest-jp">イノダコーヒ</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Kyoto Morning Set</span> — ขนมปัง + ไข่ + กาแฟดำเข้ม ตำนาน 80 ปี</td>
+              <td data-label="ราคา" class="price-tag">880 ¥</td>
+              <td data-label="Location" class="location-tag">Kyoto Station Porta · 7:00-22:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">% Arabica Arashiyama <span class="star">★</span></div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Latte</span> วิวสะพานโทเก็ตสึ + แม่น้ำ — Latte ที่ดีที่สุดของเกียวโต</td>
+              <td data-label="ราคา" class="price-tag">600-800 ¥</td>
+              <td data-label="Location" class="location-tag">ติดสะพาน Arashiyama · 8:00-18:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Lawson Premium</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Tamago Sando + กาแฟ — กินบนรถไฟ</td>
+              <td data-label="ราคา" class="price-tag">600 ¥</td>
+              <td data-label="Location" class="location-tag">Shin-Osaka Station · 24 ชม.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Lunch -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Lunch</div>
+          <div class="meal-title">มื้อเที่ยง · Arashiyama</div>
+        </div>
+        <div class="meal-context">⭐ Arashiyama เด่นเรื่อง Yudofu (เต้าหู้ต้มเกียวโต) + Soba — อาหารเรียบง่ายแต่ลึกซึ้ง</div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Shoraian <span class="star">★</span></div><div class="rest-jp">松籟庵</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Yudofu Course</span>, Tofu Kaiseki, Yuba Sashimi — บ้านที่อดีตนายกฯ Konoe เคยใช้!</td>
+              <td data-label="ราคา" class="price-tag">4,000-7,000 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้สะพานโทเก็ตสึ · 11:00-19:30</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Arashiyama Yoshimura <span class="star">★</span></div><div class="rest-jp">嵐山よしむら</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Tororo Soba</span> + Tempura Set — โซบะทำมือวิวสะพานชั้น 2!</td>
+              <td data-label="ราคา" class="price-tag">1,500-2,500 ¥</td>
+              <td data-label="Location" class="location-tag">ติดสะพานโทเก็ตสึ · 11:00-17:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Hirakawa <span class="star">★</span></div><div class="rest-jp">廣川</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Unaju</span> (ข้าวปลาไหลย่างซอสตำนาน) — Michelin Bib Gourmand!</td>
+              <td data-label="ราคา" class="price-tag">4,500-7,500 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ Tenryu-ji · ⚠️ ต้องจองล่วงหน้า</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Saga Tofu Ine</div><div class="rest-jp">嵯峨豆腐 稲</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Yudofu Set</span> + Yuba — ราคาเป็นมิตรกว่า Shoraian</td>
+              <td data-label="ราคา" class="price-tag">1,800-3,000 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ป่าไผ่ · 11:00-17:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Hyakushiki</div><div class="rest-jp">百色</div></td>
+              <td data-label="ของควรลอง" class="menu-list">ดังโงะ + Matcha + Wagashi (ทีมที่ไม่อยากกินหนัก)</td>
+              <td data-label="ราคา" class="price-tag">800-1,500 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ป่าไผ่</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Snack at Higashiyama -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Afternoon Treats</div>
+          <div class="meal-title">ของกินเล่น · Higashiyama / Ninenzaka</div>
+        </div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Tsujiri Honten <span class="star">★</span></div><div class="rest-jp">辻利 本店</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Matcha Parfait</span> เข้มข้น, Matcha Soft Cream — ตำนานชาเขียวเกียวโต!</td>
+              <td data-label="ราคา" class="price-tag">500-1,500 ¥</td>
+              <td data-label="Location" class="location-tag">Gion-Shijo · 10:30-19:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Kasagiya <span class="star">★</span></div><div class="rest-jp">かさぎ屋</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Anmitsu</span>, Warabi-mochi, Zenzai — ตำนาน 100 ปี!</td>
+              <td data-label="ราคา" class="price-tag">800-1,200 ¥</td>
+              <td data-label="Location" class="location-tag">บนถนน Ninenzaka · 11:00-18:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Yatsuhashi Café</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Yatsuhashi อบสด</span> + Matcha — ลองรสก่อนซื้อของฝาก!</td>
+              <td data-label="ราคา" class="price-tag">600-1,000 ¥</td>
+              <td data-label="Location" class="location-tag">Ninenzaka</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">% Arabica Higashiyama</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Latte, Espresso — ระหว่างทางเดินไป Kiyomizu</td>
+              <td data-label="ราคา" class="price-tag">600-800 ¥</td>
+              <td data-label="Location" class="location-tag">Higashiyama (ทางขึ้น Kiyomizu)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Dinner -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Evening</div>
+          <div class="meal-title">มื้อเย็น · Karasuma / Pontocho</div>
+        </div>
+        <div class="meal-context">หลังกลับโรงแรม Smile Hotel — ใกล้ย่าน Karasuma + ตรอก Pontocho</div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Pontocho Alley <span class="star">★</span></div><div class="rest-jp">先斗町</div></td>
+              <td data-label="ของควรลอง" class="menu-list">ตรอกซอยตำนานริมแม่น้ำ Kamo — Yakitori, Kyoto Obanzai, Kawayuka 🌌</td>
+              <td data-label="ราคา" class="price-tag">3,000-10,000 ¥</td>
+              <td data-label="Location" class="location-tag">ริมแม่น้ำ Kamo · ถึง 23:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Menbaka Fire Ramen <span class="star">★</span></div><div class="rest-jp">麺ばか</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Fire Ramen</span> 🔥 — ราเมงโชว์ไฟลุก! (ห้ามใช้แฟลช)</td>
+              <td data-label="ราคา" class="price-tag">1,500 ¥</td>
+              <td data-label="Location" class="location-tag">Karasuma Station · 11:30-22:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Nishiki Market Yokocho</div><div class="rest-jp">錦市場</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Tako Tamago (ที่ Kai), Tonkatsu Sando (Hirano), Yuba Cracker, Soy Donut</td>
+              <td data-label="ราคา" class="price-tag">1,500-2,500 ¥</td>
+              <td data-label="Location" class="location-tag">Nishiki · ปิด 18:00 (ไปก่อน)</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Hafuu</div><div class="rest-jp">麸嘉</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Kyoto Beef Steak Course</span> + Wine Pairing — เกียวโตเชิงสมัยใหม่</td>
+              <td data-label="ราคา" class="price-tag">6,000-10,000 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ Karasuma Station · 17:00-22:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Pontocho Robin</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Kyoto Obanzai (อาหารเกียวโตประจำวัน) — บ้านๆ แต่ลึก</td>
+              <td data-label="ราคา" class="price-tag">3,500-5,000 ¥</td>
+              <td data-label="Location" class="location-tag">ตรอก Pontocho</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Late Night -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Late Night Special</div>
+          <div class="meal-title">Kawayuka — ประสบการณ์ฤดูพฤษภาคม! 🌌</div>
+        </div>
+        <div class="meal-context">⭐⭐⭐ Kawayuka = แคร่ลอยเหนือแม่น้ำ Kamo — เปิดเฉพาะ พ.ค.-ก.ย. คุณไปจังหวะที่ดีมาก!</div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Kawayuka Kappo Yamamoto <span class="star">★</span></div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Kawayuka Course</span> — Kaiseki บนแคร่เหนือแม่น้ำ ใต้ดวงดาว!</td>
+              <td data-label="ราคา" class="price-tag">6,000-15,000 ¥</td>
+              <td data-label="Location" class="location-tag">Pontocho · ⚠️ จองล่วงหน้า</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Bar K-ya</div></td>
+              <td data-label="ของควรลอง" class="menu-list">ค็อกเทลใส่มัทฉะ/sake — บาร์เกียวโต modern</td>
+              <td data-label="ราคา" class="price-tag">1,500-2,500 ¥/drink</td>
+              <td data-label="Location" class="location-tag">ใกล้ Gion · ถึงตี 1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="summary-label">Daily Cost Summary</div>
+      <div class="summary-title">สรุปงบประมาณวันที่ 6 พ.ค.</div>
+      <table class="summary-table">
+        <tr><td class="label-col">เช้า</td><td class="meal-col">% Arabica Arashiyama</td><td class="price-col">800 ¥</td></tr>
+        <tr><td class="label-col">เที่ยง</td><td class="meal-col">Yoshimura Soba / Saga Tofu Ine</td><td class="price-col">2,000-3,000 ¥</td></tr>
+        <tr><td class="label-col">ของว่าง</td><td class="meal-col">Tsujiri Matcha Parfait + Kasagiya</td><td class="price-col">1,500-2,500 ¥</td></tr>
+        <tr><td class="label-col">เย็น</td><td class="meal-col">Pontocho / Fire Ramen</td><td class="price-col">2,500-5,000 ¥</td></tr>
+        <tr><td class="label-col"><strong>รวม/คน</strong></td><td class="meal-col"></td><td class="price-col">~6,800-11,300 ¥</td></tr>
+      </table>
+    </div>
+
+    <div class="tips">
+      <div class="tips-title">Local Tips</div>
+      <div class="tip-item"><div class="tip-num">i.</div><div><strong>เกียวโตเดินกินอาหารบนถนนเป็นเรื่องไม่สุภาพ</strong> — กินที่ร้านหรือนั่งกิน ไม่ใช่เดินไปกินไปเหมือนโอซาก้า</div></div>
+      <div class="tip-item"><div class="tip-num">ii.</div><div><strong>Yudofu = ปรัชญาเกียวโต</strong> — เต้าหู้ + น้ำสาหร่าย แค่ 2 อย่าง แต่ทำให้กลายเป็นศิลปะ! ลองให้ได้</div></div>
+      <div class="tip-item"><div class="tip-num">iii.</div><div><strong>Kawayuka เปิดเฉพาะ พ.ค.-ก.ย.</strong> — จองล่วงหน้า 2-3 สัปดาห์! (เกียวโตเรียก "Yuka", โอซาก้าเรียก "Kawadoko")</div></div>
+      <div class="tip-item"><div class="tip-num">iv.</div><div><strong>Hirakawa Unagi</strong> — ต้องจองล่วงหน้า 2 สัปดาห์! Michelin Bib Gourmand ราคาเป็นมิตร</div></div>
+      <div class="tip-item"><div class="tip-num">v.</div><div><strong>Yatsuhashi 2 แบบ</strong> — แบบสด (柔らかい) เก็บได้ 2-3 วัน, แบบกรอบ (堅) เก็บได้ 1 เดือน — ของฝากเลือกแบบกรอบ!</div></div>
+    </div>
+  </div>
+
+  <!-- ============= DAY 6 ============= -->
+  <div class="day-content" id="day-6">
+    <div class="day-header">
+      <div class="day-label">Thursday · 07 May 2026</div>
+      <h2 class="day-title">Kyoto · Geisha Quarters</h2>
+      <p class="day-route">Smile Hotel → Philosopher's Path → Eikando → Gion (เช่ากิโมโน) → Kiyomizu → กลับ Shin-Osaka</p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">i.</div>
+        <div>
+          <div class="section-title">Trip Itinerary</div>
+          <div class="section-subtitle">เส้นทางและกิจกรรม</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-row">
+          <div class="timeline-time">08:15</div>
+          <div class="timeline-activity"><strong>Smile Hotel → Kyoto Station</strong></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">09:00</div>
+          <div class="timeline-activity"><strong>Kamo River + Philosopher's Path</strong> ⭐<div class="timeline-note">เดินเล่นชมเมือง · ใบเมเปิ้ลเขียวสด</div></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">09:30</div>
+          <div class="timeline-activity"><strong>Honen-in</strong> — วัดในป่าเงียบ</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">10:00</div>
+          <div class="timeline-activity"><strong>Eikando Temple + Okazaki Shrine + Gyojabashi Bridge</strong></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">10:00</div>
+          <div class="timeline-activity"><strong>เช่าชุดกิโมโนที่ Wargo</strong> ⭐<div class="timeline-note">京都着物レンタル</div></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">11:30</div>
+          <div class="timeline-activity"><strong>Gion + Yasaka Pagoda</strong> ⭐<div class="timeline-note">ใส่ชุดถ่ายรูป</div></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">15:00</div>
+          <div class="timeline-activity"><strong>คืนชุดกิโมโน → Ryozen Kannon Temple</strong></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">16:00</div>
+          <div class="timeline-activity"><strong>Yasaka Pagoda Photo Spot</strong></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">19:00</div>
+          <div class="timeline-activity"><strong>กลับ Shin-Osaka</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">ii.</div>
+        <div>
+          <div class="section-title">Food Guide</div>
+          <div class="section-subtitle">เกียวโตเต็มวัน — Kaiseki, Matcha & Geisha</div>
+        </div>
+      </div>
+
+      <!-- Breakfast -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Morning</div>
+          <div class="meal-title">มื้อเช้า · ใกล้ Smile Hotel</div>
+        </div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Smart Coffee <span class="star">★</span></div><div class="rest-jp">スマート珈琲店</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Hot Cake Set</span> + กาแฟ — Café คลาสสิก 90 ปี! บรรยากาศ Showa</td>
+              <td data-label="ราคา" class="price-tag">1,200 ¥</td>
+              <td data-label="Location" class="location-tag">Sanjo (เดินจาก Smile Hotel ~10 นาที) · 8:00-19:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Yojiya Café Ginkakuji <span class="star">★</span></div><div class="rest-jp">よーじや カフェ</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Cappuccino หน้า Yojiya</span> 🎨 — ลาเต้อาร์ต iconic + Matcha Cake</td>
+              <td data-label="ราคา" class="price-tag">700-1,500 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ Philosopher's Path · 10:00-18:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Lawson Karasuma</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Tamago Sando + Onigiri + กาแฟ — กินบนรถ</td>
+              <td data-label="ราคา" class="price-tag">600 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ Smile Hotel · 24 ชม.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Lunch -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Lunch</div>
+          <div class="meal-title">มื้อเที่ยง · Gion (ในชุดกิโมโน!)</div>
+        </div>
+        <div class="meal-context">⭐ มื้อหรูที่สุดของทริป! Kaiseki = มรดกวัฒนธรรมที่เกียวโตเป็นต้นตำรับ</div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Gion Karyo <span class="star">★</span></div><div class="rest-jp">祇園 花霞</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Kaiseki Lunch Course</span> 8-12 จาน — Hassun, Mukozuke, Yakimono...</td>
+              <td data-label="ราคา" class="price-tag">6,500-12,000 ¥</td>
+              <td data-label="Location" class="location-tag">ใจกลาง Gion · 11:30-14:30 · ⚠️ จองล่วงหน้า</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Honke Owariya <span class="star">★</span></div><div class="rest-jp">本家尾張屋</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Hourai Soba</span> 5 ชั้น — ร้านโซบะ 540 ปี! เคยเป็นซัพพลายเออร์จักรวรรดิ</td>
+              <td data-label="ราคา" class="price-tag">1,000-1,800 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ Karasuma · 11:00-15:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Gion Komori <span class="star">★</span></div><div class="rest-jp">祇園 小森</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Anmitsu Set + Matcha — บ้านเกอิชาเก่าริมคลอง Shirakawa! 🌸</td>
+              <td data-label="ราคา" class="price-tag">1,200-1,800 ¥</td>
+              <td data-label="Location" class="location-tag">ติดคลอง Shirakawa (Gion) · 11:00-19:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Hisago</div><div class="rest-jp">ひさご</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Oyakodon</span> ตำนาน Higashiyama — ข้าวหน้าไก่ไข่</td>
+              <td data-label="ราคา" class="price-tag">1,000-1,500 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ Yasaka Pagoda · 11:30-19:00 · ⚠️ ต่อแถว</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Issen Yoshoku</div><div class="rest-jp">壹錢洋食</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Issen Yoshoku — Okonomiyaki แบบเกียวโตโบราณ + หุ่นเก่าตามผนัง</td>
+              <td data-label="ราคา" class="price-tag">800-1,200 ¥</td>
+              <td data-label="Location" class="location-tag">Gion (ใกล้ Yasaka Shrine) · 11:00-22:00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Snack -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Afternoon Treats</div>
+          <div class="meal-title">ของกินเล่น · Gion / Yasaka / Ninenzaka</div>
+        </div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Saryo Tsujiri <span class="star">★</span></div><div class="rest-jp">茶寮都路里</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Tokusen Tsujiri Parfait</span> 🏆 — Matcha Parfait ดังที่สุดของเกียวโต!</td>
+              <td data-label="ราคา" class="price-tag">1,700 ¥</td>
+              <td data-label="Location" class="location-tag">Gion main street · 10:30-19:00 · ⚠️ ต่อแถว</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Inoda Coffee Sannenzaka</div></td>
+              <td data-label="ของควรลอง" class="menu-list">กาแฟดำเข้ม + Cake set — บ้านโบราณ + สวน</td>
+              <td data-label="ราคา" class="price-tag">1,000-1,500 ¥</td>
+              <td data-label="Location" class="location-tag">บนถนน Ninenzaka · 10:00-19:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Hannari Café</div></td>
+              <td data-label="ของควรลอง" class="menu-list">ขนมญี่ปุ่นปั้นสด + Wagashi — บ้านเกอิชาเก่า</td>
+              <td data-label="ราคา" class="price-tag">800-1,500 ¥</td>
+              <td data-label="Location" class="location-tag">Gion</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Yatsuhashi Café Sannenzaka</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Yatsuhashi อบสด</span> + Matcha — ลองรสก่อนซื้อ!</td>
+              <td data-label="ราคา" class="price-tag">600-1,000 ¥</td>
+              <td data-label="Location" class="location-tag">Sannenzaka</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Late Afternoon - Nishiki -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Late Afternoon</div>
+          <div class="meal-title">Nishiki Market · "ครัวของเกียวโต" 400 ปี</div>
+        </div>
+        <div class="meal-context">หลังคืนชุด → แวะตลาด Nishiki ก่อนกลับ Shin-Osaka</div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Kai <span class="star">★</span></div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Tako Tamago</span> — ปลาหมึกอัดไข่นกกระทา ร้านเก่าที่สุด!</td>
+              <td data-label="ราคา" class="price-tag">500-700 ¥</td>
+              <td data-label="Location" class="location-tag">ใน Nishiki · ปิด 18:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Hirano</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Tonkatsu Sando</span> — แซนวิชหมูทอดสไตล์เกียวโต</td>
+              <td data-label="ราคา" class="price-tag">800-1,200 ¥</td>
+              <td data-label="Location" class="location-tag">ใน Nishiki</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Yuba Don Heihachi</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Yuba Don</span> — ฟิล์มเต้าหู้สดเกียวโต</td>
+              <td data-label="ราคา" class="price-tag">1,000-1,500 ¥</td>
+              <td data-label="Location" class="location-tag">ใน Nishiki</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Konnamonja</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Soy Milk Donut</span> — โดนัทนมถั่วเหลืองสด</td>
+              <td data-label="ราคา" class="price-tag">200-300 ¥</td>
+              <td data-label="Location" class="location-tag">ใน Nishiki</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Suzuya</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Hamo Tempura — ปลาไหลทะเลทอดกรอบ</td>
+              <td data-label="ราคา" class="price-tag">600-1,000 ¥</td>
+              <td data-label="Location" class="location-tag">ใน Nishiki</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Nishiki Tsukemono</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Kyoto Pickles ของฝาก! Senmaizuke, Suguki — ผักดองตำนาน</td>
+              <td data-label="ราคา" class="price-tag">500-1,500 ¥</td>
+              <td data-label="Location" class="location-tag">ใน Nishiki</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="warning"><strong>กฎเกียวโต:</strong> ห้ามเดินกินบนถนน! ยืนกินที่หน้าร้านได้</div>
+      </div>
+
+      <!-- Dinner -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Evening</div>
+          <div class="meal-title">มื้อเย็น · กลับ Shin-Osaka</div>
+        </div>
+        <div class="meal-context">3 ทางเลือก: กินที่ Kyoto Station ก่อนกลับ / กลับแล้วกินใต้สถานี Shin-Osaka / Pontocho คืนสุดท้ายในเกียวโต</div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Kyoto Ramen Koji <span class="star">★</span></div><div class="rest-jp">京都拉麺小路</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">9 ร้านราเมงดังจากทั่วญี่ปุ่น</span> ในที่เดียว!</td>
+              <td data-label="ราคา" class="price-tag">1,000-1,500 ¥</td>
+              <td data-label="Location" class="location-tag">Kyoto Station Isetan ชั้น 10 · 11:00-22:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Isetan Eat Paradise</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Tonkatsu Wako, Tendon Tenya, Sushi Misakimaru — หลายร้านในชั้นเดียว</td>
+              <td data-label="ราคา" class="price-tag">1,500-3,000 ¥</td>
+              <td data-label="Location" class="location-tag">Kyoto Station ใต้ดิน · 11:00-22:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Pontocho Alley <span class="star">★</span></div><div class="rest-jp">先斗町</div></td>
+              <td data-label="ของควรลอง" class="menu-list">⭐ คืนสุดท้ายในเกียวโต! Yakitori, Obanzai, <span class="highlight">Kawayuka</span> 🌌</td>
+              <td data-label="ราคา" class="price-tag">3,000-10,000 ¥</td>
+              <td data-label="Location" class="location-tag">ริมแม่น้ำ Kamo · ถึง 23:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Yodobashi Shin-Osaka</div></td>
+              <td data-label="ของควรลอง" class="menu-list">หลายร้านในชั้น 8 — ราเมง, อิซากายะ, ทงคัตสึ</td>
+              <td data-label="ราคา" class="price-tag">1,500-3,000 ¥</td>
+              <td data-label="Location" class="location-tag">Yodobashi Shin-Osaka ชั้น 8 · ถึง 23:00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="summary-label">Daily Cost Summary</div>
+      <div class="summary-title">สรุปงบประมาณวันที่ 7 พ.ค.</div>
+      <table class="summary-table">
+        <tr><td class="label-col">เช้า</td><td class="meal-col">Smart Coffee / Yojiya Café</td><td class="price-col">1,200-1,500 ¥</td></tr>
+        <tr><td class="label-col">เที่ยง</td><td class="meal-col">Honke Owariya / Gion Karyo (Kaiseki)</td><td class="price-col">1,500-12,000 ¥</td></tr>
+        <tr><td class="label-col">ของว่าง</td><td class="meal-col">Saryo Tsujiri Parfait</td><td class="price-col">1,700 ¥</td></tr>
+        <tr><td class="label-col">บ่าย</td><td class="meal-col">Nishiki Market (แชร์กัน)</td><td class="price-col">1,500-2,500 ¥</td></tr>
+        <tr><td class="label-col">เย็น</td><td class="meal-col">Kyoto Ramen Koji / Pontocho</td><td class="price-col">1,500-5,000 ¥</td></tr>
+        <tr><td class="label-col"><strong>รวม/คน</strong></td><td class="meal-col"></td><td class="price-col">~7,400-22,700 ¥</td></tr>
+      </table>
+    </div>
+
+    <div class="tips">
+      <div class="tips-title">Local Tips</div>
+      <div class="tip-item"><div class="tip-num">i.</div><div><strong>Kaiseki = ประสบการณ์ที่ห้ามพลาด</strong> — ถ้าจะกินครั้งเดียวในชีวิต ต้องที่เกียวโต! Gion Karyo จองล่วงหน้า 2-3 สัปดาห์</div></div>
+      <div class="tip-item"><div class="tip-num">ii.</div><div><strong>ใส่กิโมโน + กินอาหารหรู = ระวังเปื้อน</strong> — ค่าเสียหายชุด 5,000-20,000 ¥ ขึ้นกับร้าน Wargo</div></div>
+      <div class="tip-item"><div class="tip-num">iii.</div><div><strong>ห้ามถ่ายรูปเกอิชาที่ Gion</strong> — มีกฎใหม่ ปรับ 10,000 ¥! ถ่ายเฉพาะตึก/ถนน</div></div>
+      <div class="tip-item"><div class="tip-num">iv.</div><div><strong>Honke Owariya 540 ปี</strong> — ร้านโซบะที่เก่าแก่ที่สุดในเกียวโต! Hourai Soba เสิร์ฟแบบ 5 ชั้น เครื่องเคียงเยอะ</div></div>
+      <div class="tip-item"><div class="tip-num">v.</div><div><strong>Saryo Tsujiri ต่อแถว 30-60 นาที</strong> — ไปลงชื่อก่อน 14:00 แล้วเดินเที่ยว Yasaka 1 ชม.กลับมา</div></div>
+      <div class="tip-item"><div class="tip-num">vi.</div><div><strong>ของฝากจากเกียวโต</strong> — Yatsuhashi (กรอบ), Tsukemono (ผักดอง), Matcha (Tsujiri/Ippodo), Wagashi</div></div>
+    </div>
+  </div>
+
+  <!-- ============= DAY 7 ============= -->
+  <div class="day-content" id="day-7">
+    <div class="day-header">
+      <div class="day-label">Friday · 08 May 2026</div>
+      <h2 class="day-title">Uji · Tea Ceremony Town</h2>
+      <p class="day-route">Shin-Osaka → Uji → Tatsumiya → Nakamura Tokichi → กลับโอซาก้า → Don Quijote → Dotonbori</p>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">i.</div>
+        <div>
+          <div class="section-title">Trip Itinerary</div>
+          <div class="section-subtitle">วันสุดท้าย — Uji เช้า + ของฝากบ่าย</div>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-row">
+          <div class="timeline-time">07:00</div>
+          <div class="timeline-activity"><strong>ออกจาก Shin-Osaka</strong></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">08:30</div>
+          <div class="timeline-activity"><strong>ถึง JR Uji Station</strong></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">08:45</div>
+          <div class="timeline-activity"><strong>เดินสะพาน Uji Bridge</strong> — สะพานเก่าแก่ที่สุดของญี่ปุ่น (646 AD)</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">09:00</div>
+          <div class="timeline-activity"><strong>Tsuen Tea</strong> ⭐ — ร้านชาเก่าแก่ที่สุดในโลก!</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">09:30</div>
+          <div class="timeline-activity"><strong>Byodo-in Temple</strong> ⭐⭐⭐<div class="timeline-note">UNESCO + Phoenix Hall (รูปบนเหรียญ 10 เยน)</div></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">11:00</div>
+          <div class="timeline-activity"><strong>เดิน Byodoin Omotesando + ลงชื่อ Nakamura Tokichi</strong></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">11:30</div>
+          <div class="timeline-activity"><strong>มื้อเที่ยงที่ Tatsumiya</strong> 🍜</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">12:30</div>
+          <div class="timeline-activity"><strong>กลับ JR Uji Station + Nakamura Tokichi Parfait</strong></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">13:30</div>
+          <div class="timeline-activity"><strong>กลับ Shin-Osaka</strong></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">15:30</div>
+          <div class="timeline-activity"><strong>Don Quijote Dotonbori</strong> 🛍️ ซื้อของฝาก</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">18:30</div>
+          <div class="timeline-activity"><strong>Dotonbori + ป้ายกูลิโกะตอนค่ำ</strong> 📷</div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-time">21:00</div>
+          <div class="timeline-activity"><strong>กลับ Shin-Osaka + เก็บกระเป๋า</strong> ✈️</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">ii.</div>
+        <div>
+          <div class="section-title">Food Guide</div>
+          <div class="section-subtitle">Uji Matcha + ของฝาก + คืนสุดท้าย Dotonbori</div>
+        </div>
+      </div>
+
+      <!-- Breakfast -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Morning</div>
+          <div class="meal-title">มื้อเช้า · ก่อนออกเดินทาง</div>
+        </div>
+        <div class="meal-context">⚠️ ไม่แนะนำกินหนัก — วันนี้ Uji กินมัทฉะ + ขนมเยอะ!</div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Lawson Premium</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Tamago Sando + Onigiri + กาแฟ — กินบนรถไฟ</td>
+              <td data-label="ราคา" class="price-tag">700 ¥</td>
+              <td data-label="Location" class="location-tag">Shin-Osaka Station · 24 ชม.</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">St. Marc Café</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Choco Cro + กาแฟ — ที่นั่งสบายก่อนขึ้นรถไฟ</td>
+              <td data-label="ราคา" class="price-tag">600 ¥</td>
+              <td data-label="Location" class="location-tag">ใต้ Shin-Osaka · 7:00-22:00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Morning Tea at Uji -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Tea Time</div>
+          <div class="meal-title">มัทฉะตอนเช้า · ที่ Uji</div>
+        </div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Tsuen Tea <span class="star">★</span></div><div class="rest-jp">通圓茶屋</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Matcha + Warabi-mochi</span>, Hojicha (ชาคั่ว) — ร้านชาเก่าแก่ที่สุดในโลก! เปิดตั้งแต่ปี 1160 🍵</td>
+              <td data-label="ราคา" class="price-tag">600-1,200 ¥</td>
+              <td data-label="Location" class="location-tag">ติดสะพาน Uji · 9:30-17:30</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Lunch at Uji -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Lunch</div>
+          <div class="meal-title">มื้อเที่ยง · ที่ Uji (Cha-soba!)</div>
+        </div>
+        <div class="meal-context">⭐ Uji เด่นเรื่อง Cha-soba — โซบะที่ทำจากใบชาเขียว! สีเขียวสดสวยมาก</div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Tatsumiya <span class="star">★</span></div><div class="rest-jp">辰巳屋</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Cha-soba Set</span> — โซบะใบชา + ข้าวปั้น + เทมปุระ — บ้านเก่า + tatami</td>
+              <td data-label="ราคา" class="price-tag">1,500-2,000 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ Byodo-in · 11:00-15:00 (ปิดวันพุธ)</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Itoh Kyuemon Chabou</div><div class="rest-jp">伊藤久右衛門 茶房</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Cha-soba + <span class="highlight">Matcha Parfait</span> ในร้านเดียว — Backup ถ้า Tatsumiya เต็ม</td>
+              <td data-label="ราคา" class="price-tag">1,500-2,500 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ Byodo-in · 11:00-17:00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Snack & Souvenirs at Uji -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Afternoon Treats</div>
+          <div class="meal-title">ของหวาน + ของฝากมัทฉะ · Uji Omotesando</div>
+        </div>
+        <div class="meal-context">⭐ ห้ามพลาด Nakamura Tokichi! ลงชื่อก่อน 11:00 → กลับมา 12:30 ทันคิว</div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Nakamura Tokichi <span class="star">★</span></div><div class="rest-jp">中村藤吉本店</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Matcha Jelly Parfait</span> 🏆 — เข้มข้นที่สุดในโลก! + Matcha Cookie ของฝาก</td>
+              <td data-label="ราคา" class="price-tag">1,300-1,700 ¥</td>
+              <td data-label="Location" class="location-tag">ใกล้ JR Uji Station · 10:00-17:30 · ⚠️ ต่อแถว</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Itoh Kyuemon <span class="star">★</span></div><div class="rest-jp">伊藤久右衛門</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Matcha Kit Kat (เฉพาะ Uji!)</span>, มัทฉะระดับพิธี 100g, Hojicha</td>
+              <td data-label="ราคา" class="price-tag">1,200-3,500 ¥</td>
+              <td data-label="Location" class="location-tag">Byodoin Omotesando</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Marukyu Koyamaen</div><div class="rest-jp">丸久小山園</div></td>
+              <td data-label="ของควรลอง" class="menu-list">มัทฉะระดับพิธีของจริง — ตำนาน 300 ปี</td>
+              <td data-label="ราคา" class="price-tag">2,000-5,000 ¥</td>
+              <td data-label="Location" class="location-tag">Uji main street</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Souvenirs at Don Quijote -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Shopping</div>
+          <div class="meal-title">ของฝาก · Don Quijote Dotonbori 🛍️</div>
+        </div>
+        <div class="meal-context">⭐ ใช้คูปอง WAUG! เปิด 24 ชม. + Tax Free 10% (โชว์พาสปอร์ต)</div>
+        <table class="rest-table">
+          <thead><tr><th>ของฝาก</th><th>คำแนะนำ</th><th>ราคา</th><th>หมายเหตุ</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ของฝาก"><div class="rest-name">PABLO Cheesecake Mini <span class="star">★</span></div></td>
+              <td data-label="คำแนะนำ" class="menu-list">กล่อง 8 ชิ้น — ของฝากยอดฮิต</td>
+              <td data-label="ราคา" class="price-tag">1,800 ¥</td>
+              <td data-label="หมายเหตุ" class="location-tag">เก็บได้ 1 สัปดาห์</td>
+            </tr>
+            <tr>
+              <td data-label="ของฝาก"><div class="rest-name">Royce Chocolate</div></td>
+              <td data-label="คำแนะนำ" class="menu-list">ช็อกโกแลต Hokkaido รสนามาเช</td>
+              <td data-label="ราคา" class="price-tag">600-1,200 ¥</td>
+              <td data-label="หมายเหตุ" class="location-tag">⚠️ ต้องกล่องเย็น (ใกล้กลับ)</td>
+            </tr>
+            <tr>
+              <td data-label="ของฝาก"><div class="rest-name">Kit Kat รสพิเศษ <span class="star">★</span></div></td>
+              <td data-label="คำแนะนำ" class="menu-list">Matcha, Sake, Wasabi, Sakura — รสที่ไทยไม่มี</td>
+              <td data-label="ราคา" class="price-tag">500 ¥/กล่อง</td>
+              <td data-label="หมายเหตุ" class="location-tag">น้ำหนักเบา ของฝากแจก</td>
+            </tr>
+            <tr>
+              <td data-label="ของฝาก"><div class="rest-name">Calbee Jagariko</div></td>
+              <td data-label="คำแนะนำ" class="menu-list">มันฝรั่งทอดทุกรสที่ไทยไม่มี</td>
+              <td data-label="ราคา" class="price-tag">200 ¥</td>
+              <td data-label="หมายเหตุ" class="location-tag">ของกินดึก/ของฝากเล็กๆ</td>
+            </tr>
+            <tr>
+              <td data-label="ของฝาก"><div class="rest-name">CANMAKE / KATE</div></td>
+              <td data-label="คำแนะนำ" class="menu-list">เครื่องสำอางญี่ปุ่น</td>
+              <td data-label="ราคา" class="price-tag">300-1,500 ¥</td>
+              <td data-label="หมายเหตุ" class="location-tag">ถูกกว่าไทย 30-50%</td>
+            </tr>
+            <tr>
+              <td data-label="ของฝาก"><div class="rest-name">ยา/วิตามิน</div></td>
+              <td data-label="คำแนะนำ" class="menu-list">ไอโตเฟน, EVE, Pabron, Salonpas, Vit C</td>
+              <td data-label="ราคา" class="price-tag">500-2,000 ¥</td>
+              <td data-label="หมายเหตุ" class="location-tag">ของฝากผู้ใหญ่</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Dinner -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Evening</div>
+          <div class="meal-title">มื้อเย็น · Dotonbori (คืนสุดท้าย!)</div>
+        </div>
+        <div class="meal-context">⭐ คืนสุดท้ายของทริป! ลองของใหม่ที่ยังไม่ได้กิน</div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Hozenji Yokocho <span class="star">★</span></div><div class="rest-jp">法善寺横丁</div></td>
+              <td data-label="ของควรลอง" class="menu-list">ตรอกซอยโบราณ — Yakiton, Udonsuki Mimiu, Yoshino Sushi</td>
+              <td data-label="ราคา" class="price-tag">2,500-5,000 ¥</td>
+              <td data-label="Location" class="location-tag">ติด Dotonbori · ถึง 24:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Negiyaki Yamamoto <span class="star">★</span></div><div class="rest-jp">ねぎ焼やまもと</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Suji-Negiyaki</span> — ต้นกำเนิด Negiyaki! เปิด 70 ปี (โอโคโนมิยากิต้นหอม)</td>
+              <td data-label="ราคา" class="price-tag">1,500-2,500 ¥</td>
+              <td data-label="Location" class="location-tag">Juso (ใกล้ Shin-Osaka) · 11:30-22:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Mimiu</div><div class="rest-jp">美々卯</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">Udonsuki</span> — หม้อไฟอุด้งตำนาน เฉพาะโอซาก้า!</td>
+              <td data-label="ราคา" class="price-tag">3,500-5,000 ¥</td>
+              <td data-label="Location" class="location-tag">Hozenji Yokocho</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Endo Sushi</div><div class="rest-jp">遠藤寿司</div></td>
+              <td data-label="ของควรลอง" class="menu-list">ซูชิอาหารทะเลตลาด — ปลาสดจาก Osaka Central Market</td>
+              <td data-label="ราคา" class="price-tag">2,500-4,000 ¥</td>
+              <td data-label="Location" class="location-tag">Dotonbori · ถึง 22:00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Late Night -->
+      <div class="meal-block">
+        <div class="meal-header">
+          <div class="meal-time">Last Night</div>
+          <div class="meal-title">ของหวานปิดทริป + Photo Spot 🌃</div>
+        </div>
+        <table class="rest-table">
+          <thead><tr><th>ชื่อร้าน</th><th>ของควรลอง</th><th>ราคา</th><th>Location</th></tr></thead>
+          <tbody>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Hokkyokusei Pudding <span class="star">★</span></div><div class="rest-jp">北極星</div></td>
+              <td data-label="ของควรลอง" class="menu-list"><span class="highlight">555 Pudding</span> ตำนาน 100 ปี — บรรยากาศ Showa</td>
+              <td data-label="ราคา" class="price-tag">500 ¥</td>
+              <td data-label="Location" class="location-tag">Shinsaibashi · 11:00-22:00</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Glico Café</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Almond Pocky Latte 📷 — ป้ายกูลิโกะตอนค่ำ Photo Spot สุดท้าย!</td>
+              <td data-label="ราคา" class="price-tag">600 ¥</td>
+              <td data-label="Location" class="location-tag">Dotonbori (ใต้ป้ายกูลิโกะ)</td>
+            </tr>
+            <tr>
+              <td data-label="ชื่อร้าน"><div class="rest-name">Genroku Sushi 24</div><div class="rest-jp">元禄寿司</div></td>
+              <td data-label="ของควรลอง" class="menu-list">Conveyor Sushi 24 ชม. — หิวดึกหลังช้อป</td>
+              <td data-label="ราคา" class="price-tag">110-500 ¥/จาน</td>
+              <td data-label="Location" class="location-tag">Sennichimae Dotonbori · 24 ชม.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="summary-label">Daily Cost Summary</div>
+      <div class="summary-title">สรุปงบประมาณวันที่ 8 พ.ค.</div>
+      <table class="summary-table">
+        <tr><td class="label-col">เช้า</td><td class="meal-col">Lawson Premium</td><td class="price-col">700 ¥</td></tr>
+        <tr><td class="label-col">มัทฉะเช้า</td><td class="meal-col">Tsuen Tea</td><td class="price-col">800 ¥</td></tr>
+        <tr><td class="label-col">เที่ยง</td><td class="meal-col">Tatsumiya Cha-soba</td><td class="price-col">1,500-2,000 ¥</td></tr>
+        <tr><td class="label-col">ของหวาน</td><td class="meal-col">Nakamura Tokichi Parfait</td><td class="price-col">1,300-1,700 ¥</td></tr>
+        <tr><td class="label-col">ของฝาก</td><td class="meal-col">Don Quijote (มัทฉะ + ขนม + ยา)</td><td class="price-col">5,000-10,000 ¥</td></tr>
+        <tr><td class="label-col">เย็น</td><td class="meal-col">Hozenji / Negiyaki Yamamoto</td><td class="price-col">2,000-3,500 ¥</td></tr>
+        <tr><td class="label-col"><strong>รวม/คน (รวมของฝาก)</strong></td><td class="meal-col"></td><td class="price-col">~11,300-18,700 ¥</td></tr>
+      </table>
+    </div>
+
+    <div class="tips">
+      <div class="tips-title">Last Day Tips</div>
+      <div class="tip-item"><div class="tip-num">i.</div><div><strong>กลยุทธ์ Nakamura Tokichi</strong> — ลงชื่อตอน 11:00 ก่อนไป Tatsumiya → กลับมา 12:30 ทันคิวพอดี ไม่เสียเวลา!</div></div>
+      <div class="tip-item"><div class="tip-num">ii.</div><div><strong>Matcha Kit Kat Uji</strong> — มีเฉพาะที่ Uji เท่านั้น! ไม่มีในไทย/ไม่มีในโตเกียว — ของฝากที่เพื่อนๆ จะดีใจมาก</div></div>
+      <div class="tip-item"><div class="tip-num">iii.</div><div><strong>Don Quijote ของฝาก Pro Tip</strong> — Tax Free 10% (พกพาสปอร์ต!) ใช้คูปอง WAUG ได้อีก 5-7%</div></div>
+      <div class="tip-item"><div class="tip-num">iv.</div><div><strong>เก็บกระเป๋าก่อนไปเที่ยว</strong> — กลับโรงแรมหลัง Don Quijote เก็บของฝากใส่กระเป๋าก่อน — ไม่ต้องเสียเวลาตอนเช้าวันบิน</div></div>
+      <div class="tip-item"><div class="tip-num">v.</div><div><strong>ของกินที่ห้ามใส่กระเป๋าโหลด</strong> — ของเหลว >100ml ต้องใส่กระเป๋าใหญ่ (มัทฉะผง OK), ผลไม้/พืชสดห้ามเข้าไทย</div></div>
+      <div class="tip-item"><div class="tip-num">vi.</div><div><strong>Akafuku ที่ซื้อจาก Day 2 (3 พ.ค.)</strong> — เก็บได้ 2 วัน ⚠️ กินก่อน 5 พ.ค. ถ้าจะซื้อกลับไทย ต้องซื้อใหม่วันนี้!</div></div>
+    </div>
+  </div>
+
 </div>
 
-<!-- FOOTER -->
 <footer>
-  <span>関西旅行</span> · คู่มือท่องเที่ยวคันไซ ญี่ปุ่น · ต้นพฤษภาคม Golden Week · 7 จังหวัด 37 ที่เที่ยว 24 พิพิธภัณฑ์
+  <div>KANSAI FOOD GUIDE · 2-9 MAY 2026</div>
+  <div class="by">Curated by Gin</div>
 </footer>
 
-<div class="copy-toast" id="toast">✅ คัดลอกลิงค์แล้ว!</div>
-
 <script>
-  function switchTab(name, btn) {
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-' + name).classList.add('active');
-    btn.classList.add('active');
-    // Reset animation
-    document.querySelectorAll('#tab-' + name + ' .province-block').forEach((el, i) => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(16px)';
-      el.style.animation = 'none';
-      setTimeout(() => {
-        el.style.animation = `fadeUp 0.5s ease forwards ${i * 0.05}s`;
-      }, 10);
-    });
-  }
+const tabs = document.querySelectorAll('.tab');
+const days = document.querySelectorAll('.day-content');
 
-  function copyLink() {
-    const url = window.location.href;
-    navigator.clipboard.writeText(url).then(() => {
-      const toast = document.getElementById('toast');
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2500);
-    }).catch(() => {
-      // fallback
-      const ta = document.createElement('textarea');
-      ta.value = url;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      const toast = document.getElementById('toast');
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2500);
-    });
-  }
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const day = tab.dataset.day;
+    
+    tabs.forEach(t => t.classList.remove('active'));
+    days.forEach(d => d.classList.remove('active'));
+    
+    tab.classList.add('active');
+    document.getElementById('day-' + day).classList.add('active');
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
 </script>
+
 </body>
 </html>
